@@ -1,0 +1,81 @@
+{
+	"id": "openmindnl.leditor",
+	"name": {
+		"en": "LEDitor"
+	},
+	"version": "0.1.0",
+	"compatibility": "0.x || 1.x",
+	"description": {
+		"en": "Create custom LED Ring animations for Homey",
+		"nl": "Maak eigen LED Ring animaties voor Homey"
+	},
+	"author": {
+		"name": "Alex van den Berg",
+		"email": "openmind_nl@hotmail.com"
+	},
+	"contributors": {
+		"developers": [
+			{
+				"name": "Alex van den Berg",
+				"email": "openmind_nl@hotmail.com"
+			}
+		]
+	},
+	"category": [
+		"appliances",
+		"tools"
+	],
+	"images": {
+		"large": "assets/images/large.jpg",
+		"small": "assets/images/small.jpg"
+	},
+	"permissions": [
+		"homey:manager:ledring"
+	],
+	"flow": {
+		"actions": [
+			{
+				"id": "animation_select",
+				"title": {
+					"en": "Play an animation",
+					"nl": "Speel een animatie"
+				},
+				"hint": {
+					"en": "This card plays an animation for a given number of seconds. 1...3600 = 1 second to 1 hour",
+					"nl": "Dit kaartje speelt een animatie gedurende een op te geven aantal seconden. 1...3600 = 1 seconde tot 1 hour"
+				},
+				"args": [
+					{
+						"name": "animationSelector",
+						"type": "autocomplete",
+						"placeholder": {
+							"en": "Animation",
+							"nl": "Animatie"
+						}
+					},
+					{
+						"name": "animationTime",
+						"type": "number",
+						"min": "1",
+						"max": "3600",
+						"placeholder": {
+							"en": "1...3600 seconds",
+							"nl": "1...3600 seconden"
+						}
+					}
+				]
+			},
+			{
+				"id": "animation_stop",
+				"title": {
+					"en": "Stop een animation",
+					"nl": "Stop een animatie"
+				},
+				"hint": {
+					"en": "This card stops an animation and shows the LED-ring screensaver.",
+					"nl": "Dit kaartje stopt een animatie en toont de LED-ring screensaver."
+				}
+			}
+		]
+	}
+}
