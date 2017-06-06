@@ -9,5 +9,10 @@ The user's pleasure is my reward. People who like to show some extra gratitude c
 </form>
 
 
+###v0.1.1
+* Removed bug: Moving a frame up/down and then use undo would result in two corrupted frames and render the animation unusable.
+* Removed bug: When moving a frame up/down, it now stays selected.
+* Removed some useless code
+
 ###v0.1.0
 * First beta release
