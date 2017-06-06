@@ -109,7 +109,6 @@
 						<th id="headerFrame" title="" style="width: 40px; text-align: center;" data-i18n="settings.header_frame"></th>
 						<th id="headerColors" title="" style="width: 240px; text-align: center;" data-i18n="settings.header_colors"></th>
 						<td style="width: 120px;">
-							<!-- input type="checkbox" id="colorCorrect" onClick="setColorCorrect(this);"><span id="txtColorCorrect">Color correct</span -->
 						</td>
 						<td>&nbsp;</td>
 					</tr>
@@ -282,7 +281,6 @@
 			</tr>
 		</table>
 
-
 	</td></tr></table>
 
 		<script type="text/javascript">
@@ -394,11 +392,6 @@
 			txt_frame_copy = __('settings.frame_button_copy');
 			txt_ani_copy = __('settings.animation_button_copy');
 
-
-			ledSelectPreview( {r:0, b:0, g:0} );
-			//colPreview.innerHTML = txt_ed_apply_off;
-
-
 			butCopyAni.title = txt_ani_copy.replace('###', selectedAnimation+1);
 
 			butAddFrame.title = txt_frame_add.replace( '###', selectedFrame+1 );
@@ -461,7 +454,7 @@
 			}
 			helpText.Default = __('settings.intro');
 
-
+			ledSelectPreview( {r:0, b:0, g:0} );
 
 			Homey.get('topColor', function( err, tColor ){
 				if ( tColor == undefined ){
@@ -677,9 +670,7 @@
 	function setupImportArea(){
 		var	imgImportW = imgImport.width,
 			imgImportH = imgImport.height,
-			//canvImport = document.getElementById('canvImport'),
 			ctx = canvImport.getContext('2d'),
-			//canvImage = document.getElementById('canvImage'),
 			ctx2 = canvImage.getContext('2d'),
 			f = document.getElementById("uploadimage").files[0],
 			url = window.URL || window.webkitURL,
@@ -821,9 +812,7 @@
 	function importImageToMatrix(){
 		// copy imgImportData to matrix area & import area
 		if( imgImport == null ){ return; }
-		var	//canvImportedFrames = document.getElementById('canvImportedFrames'),
-			//canvImportV = document.getElementById('canvImportV'),
-			ctx3 = canvImportedFrames.getContext('2d'),
+		var	ctx3 = canvImportedFrames.getContext('2d'),
 			ctxV = canvImportV.getContext('2d'),
 			colorW = 15,
 			colorH = 10,
@@ -1317,13 +1306,13 @@
 			trLine += '<td style="width: 10px;"></td>';
 			trLine += '<td style="width: 20px;">';
 			if( idx > 0 ){
-				trLine += '<button id="moveUp' + idx + '" style="visibility: hidden; width:20px; height:20px; padding: 0px 0px;" title="' + txtMoveUp + '" onclick="clickFrameMove(this);"><img src="../assets/images/frame_up.png" height="16" width="16" style="float: center;"></button>';
+				trLine += '<button id="moveUp' + idx + '" style="visibility: hidden; width:20px; height:20px; padding: 0px 0px;" title="' + txtMoveUp + '" onmousedown="clickFrameMove(this);"><img src="../assets/images/frame_up.png" height="16" width="16" style="float: center;"></button>';
 			}
 			trLine += '</td>';
 
 			trLine += '<td style="width: 20px;">';
 			if( idx < ledFrames.length-1 ){
-				trLine += '<button id="moveDown' + idx + '" style="visibility: hidden; width:20px; height:20px; padding: 0px 0px;" title="' + txtMoveDown + '" onclick="clickFrameMove(this);"><img src="../assets/images/frame_down.png" height="16" width="16" style="float: center;"></button>';
+				trLine += '<button id="moveDown' + idx + '" style="visibility: hidden; width:20px; height:20px; padding: 0px 0px;" title="' + txtMoveDown + '" onmousedown="clickFrameMove(this);"><img src="../assets/images/frame_down.png" height="16" width="16" style="float: center;"></button>';
 			}
 			trLine += '</td>';
 
@@ -1359,15 +1348,15 @@
 				var xMove = 1;
 				xId = Number(xId.substr(8));
 			}
-
-			var tempFrame = ledFrames[ xId + xMove ].splice(0);
-			ledFrames[ xId + xMove ] = ledFrames[ xId ].splice(0);
-			ledFrames[ xId ] = tempFrame.splice(0);
-
-			selectedFrame = xId + xMove;
+			var tempFrame = [].concat( ledFrames[ xId + xMove ] );
+			ledFrames[ xId + xMove ] = [].concat( ledFrames[ xId ] );
+			ledFrames[ xId ] = [].concat( tempFrame );
+			
 			refreshFramesList();
-			divFrameScroll.scrollTop += (document.getElementById('frameLine0').offsetHeight * xMove) ;
 			actionUndo();
+			selectedFrame = xId + xMove;
+			frameSelect({ id:'frameLine'+selectedFrame });
+			divFrameScroll.scrollTop += (document.getElementById('frameLine0').offsetHeight * xMove) ;
 		}
 
 
@@ -1869,10 +1858,6 @@
 			}
 		}
 
-		function setColorCorrect( obj ){
-			refreshLedSelectors();
-		}
-
 		function changeNumberSetting( obj ){
 			var 	xVal = Number(obj.value),
 				vMin = Number(obj.min),
@@ -1900,11 +1885,6 @@
 				case'inRPM':
 					valRPM = xVal;
 					rotateMs = valRPM * 360 / 60000;
-					if( playMode ) {
-						if( valRPM == 0 ){
-							//divRing.style.animation = 'aniRotation 0s infinite';
-						}
-					}
 					break;
 
 				case'inRepeat':
@@ -1935,7 +1915,6 @@
 			playPrevMode = !playPrevMode;
 
 			if( playPrevMode ){	// play preview
-				//saveAnimation( selectedAnimation );
 				butPreview.innerHTML = '<img src="../assets/images/homey_working.png" height="30" width="30" style="float: center;">';
 				var tLoad = ledFrames.length * 15; // wait 15ms for each frame to upload.
 				var tDuration = Math.ceil( ledFrames.length / inFPS.value * 1000 * inRepeat.value );
@@ -1943,7 +1922,6 @@
 				setTimeout( function(){ // wait 0.5 sec for icon to change to 'working'.
 					setTimeout( function(){
 						butPreview.innerHTML = '<img src="../assets/images/homey_stop.png" height="30" width="30" style="float: center;">';
-						//butPreview.title = 'Missing title';
 
 						previewPlayTimer = setTimeout( function(){ // wait animation duration.
 							clickPrev( butPreview );
@@ -1998,8 +1976,6 @@
 					frameID = requestAnimationFrame(runAnimation);
 				}, 500)
 				divEdit.style.visibility = "hidden";
-				//divRing.style.animation = 'aniRotation 0s infinite';
-				//divRing.style.animationTimingFunction = 'linear';
 
 				canvRing2.style.transitionTimingFunction = 'linear';
 				canvRing2.style.transitionDuration = '0ms';
@@ -2010,8 +1986,6 @@
 				cancelAnimationFrame(frameID);
 				obj.innerHTML = '<img src="../assets/images/ani_play.png" height="30" width="30" style="float: center;">';
 				divEdit.style.visibility = "visible";
-				//divRing.style.animation = 'aniRotation 0s infinite';
-				//divRing.style.animationTimingFunction = 'linear';
 
 				divRing.style.transform = 'rotate(0deg)';
 				refreshButtons();
@@ -2022,7 +1996,7 @@
 		}
 
 
-		// requestAnimationFrame polyfill by Erik Möller (Opera).
+		// requestAnimationFrame polyfill by Erik MÃ¶ller (Opera).
 		// fixes from Paul Irish (Google) and Tino Zijdel (Tweakers.net).
 		(function() {
 			var lastTime = 0;
@@ -2124,10 +2098,8 @@
 
 			if( dropFillType.value == 'type_3' ){
 				setColPreviewFill( '' );
-				//ctxCol.fillRect( 0, 0, colPreview.width, colPreview.height );
 			} else {
 				setColPreviewFill( colPal[selectedColor] );
-				//ctxCol.fillRect( 0, 0, colPreview.width, colPreview.height );
 
 				var compCol = ledCol.r +','+ ledCol.g +','+ ledCol.b;
 				switch( compCol ){
