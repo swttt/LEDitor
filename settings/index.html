@@ -68,12 +68,9 @@
 						<td style="width:35px; text-align: left;">
 							<button id="but_rename_ani" title="click to rename animation" style="position:relative; left:0px; top:0px; width:35px; height:32px; vertical-align:middle; padding: 0px 0px;" onclick = "clickAniRename(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_rename.png" height="30" width="30" style="float: center;"></button>
 						</td>
-								
-
 						<td style="width:80px; text-align: right;">
 							<div id="frameCount" title=""></div>
 						</td>
-
 						<td style="text-align: left;">
 								&nbsp;@ <input style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inFPS" type="number" value="1" min="1" max="30" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Frames Per Second" /> FPS,
 								&nbsp;<input style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inTFPS" type="number" value="60" min="1" max="60" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Interpolated Frames Per Second" /> IFPS.
@@ -84,7 +81,6 @@
 						<td style="text-align: left;">
 							<input style="width:40px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inRPM" type="number" value="0" min="-127" max="127" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Rotations Per Minute" /> RPM.
 						</td>
-
 						<td style="width:100px;">
 							<div style=" position:relative; top:0px; left:0px; width:140px; height:32px;">
 							<button id="butPlay" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickPlay(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_play.png" height="30" width="30" style="float: center;"></button>
@@ -93,7 +89,6 @@
 							<input id="inRepeat" style="position:absolute; left:102px; top:6px; width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" type="number" value="1" min="1" max="20" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" />
 							</div>
 						</td>
-
 						<td style="width:40px; font-size:12px; text-align:center;" id="repeatTime">00:00
 						</td>
 					</tr>
@@ -141,19 +136,16 @@
 					</div>
 					<canvas id="canvTop" width="400" height="400" style="position:absolute; left:0px; top:0px; width:400px; height:400px;"></canvas>
 						
-
-					<div id="nrFrame" style="position:absolute; left:330px; top:2px; height:20px; width:100px; text-align:left; font-size:12px;">Frame: 200</div>
+					<div id="frameNumber" style="position:absolute; left:330px; top:2px; height:20px; width:100px; text-align:left; font-size:12px;">Frame: 200</div>
 					<div id="txtLedRing" style="position:absolute; left:200px; top:382px; height:18px; width:198px; text-align:right; font-size:9px;" data-i18n="settings.txt_ledring"></div>
 
 					<!-- Central LED edit -->
 					<div id="divEdit" style="top:0px; left:0px; width:400px; height:400px;">
 						<svg id="linePointer" height="400" width="400" style="position:absolute; top:0px; left:0px; width:400px; height:400px;">
-							<line id="lPointer" stroke-dasharray="2, 2" x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(0,0,0); stroke-width:2;  transition: stroke .25s linear;visibility:hidden;" />
+							<line id="lPointer" stroke-dasharray="2, 2" x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(0,0,0); stroke-width:2;  transition: stroke .25s linear; visibility:hidden;" />
 						</svg>
-
-					<div id="ledMarkers" style="top:0px; left:0px; width:400px; height:400px;">
-					</div>
 						<img id="butTopColor" src="../assets/images/icon_bw.png" height="20" width="20" style="position:absolute; left:2px; top:2px; width:20px; height:20px; padding: 0px 0px; cursor:pointer;" onclick="changeTopColor();" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+						<div id="ledMarkers" style="top:0px; left:0px; width:400px; height:400px;"> </div>
 						
 						<div style="position:absolute; left:95px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_processing">Edit</div>
 						<select id="dropFillType" name="dropFillType" style="position:absolute; left:95px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick = "selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
@@ -161,6 +153,7 @@
 							<option value="type_2" data-i18n="settings.txt_drop_type_2">jump</option>
 							<option value="type_3" data-i18n="settings.txt_drop_type_3">jump</option>
 						</select>
+
 						<div style="position:absolute; left:200px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_range">Range</div>
 						<select id="dropFillRange" name="dropFillRange" style="position:absolute; left:200px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick = "selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
 							<option value="fill_2" data-i18n="settings.ed_fill_range_2">to every 2nd LED</option>
@@ -170,8 +163,7 @@
 						<div style="position:absolute; left:150px; top:230px; width:100px; height:20px; color:#000000; text-align:center;" data-i18n="settings.txt_led_setting">LED status</div>
 
 						<!-- **** color palette **** -->
-						<div id="divColorPal" style="position:absolute; top:80px; left:80px; width:240px; height:240px; background-color: #000000;">
-						</div>
+						<div id="divColorPal" style="position:absolute; top:80px; left:80px; width:240px; height:240px; background-color: #000000;"> </div>
 					</div>
 				</div>
 			</td>
@@ -196,13 +188,10 @@
 		</tr>
 		</table>
 
-	
-
 		<!-- ***** image import ***** -->
 		<table id="imageImporter" style="position:relative; left:0px; top:0px; width:844px; visibility:hidden; border-collapse: collapse;">
 			<tr style="height:34px; background-color:#ffffff;">
 				<th style="width:400px; background-color: Gainsboro; text-align:center;">
-					
 					<div data-i18n="settings.txt_led_colors">LED colors</div>
 				</th>
 				<td style="width:50px;background-color: Gainsboro; text-align:center;"></td>
@@ -219,7 +208,6 @@
 					<button id="but_open_image" class="buttonEdit" style="position:absolute; left:0px; top:400px;" onclick = "uploadimage.click();" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img id="iconOpenImage" src="../assets/images/open_image.png" height="30" width="30" style="float: center;"></button>
 					<button id="but_import_cancel" class="buttonEdit" style="position:absolute; left:360px; top:400px;" onclick = "closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/cancel.png" height="30" width="30" style="float: center;"></button>
 					<button id="but_import_accept" class="buttonEdit" style="position:absolute; left:320px; top:400px;" onclick = "closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/accept.png" height="30" width="30" style="float: center;"></button>
-					
 				</td>
 				<td style="width:40px;">
 					<div style="position:absolute; left:400px; top:0px; width:40px; height:100px;">
@@ -289,15 +277,9 @@
 			selectedFrame = 0,
 			undoList = [], undoPointer = -1;
 	
-		var max_fields	= 200;	//maximum frames allowed
+		var max_fields	= 200;	//maximum frames allowed by Homey
 		var count_frames = 0;	//used frames
-		var replacements = {};
-		var docFrames = document.getElementById("tableFrames");
-		var saveStandby = 0;
-		var 	txtUsed =  '',
-			txtFree = '',
-			txtUpdated = '',
-			txtMoveUp = '',
+		var 	txtMoveUp = '',
 			txtMoveDown = '',
 			txtRemove = '',
 			txt_frame_add = '',
@@ -381,11 +363,8 @@
 			Homey.ready();
 
 			txtRemove = __('settings.remove');
-			txtUsed = __('settings.used');
-			txtFree = __('settings.free');
 			txtMoveUp = __('settings.move_up');
 			txtMoveDown = __('settings.move_down');
-			txtUpdated = __('settings.updated');
 			txt_ed_apply_off = __('settings.ed_apply_off');
 
 			txt_frame_add = __('settings.frame_button_add');
@@ -406,6 +385,7 @@
 			but_edit_fill.title = __('settings.ed_fill_equal');
 			but_edit_flow.title = __('settings.ed_fill_gradient');
 
+			txt_solid = __('settings.txt_solid');
 			txt_drop_type[0] = __('settings.txt_drop_type_1');
 			txt_drop_type[1] = __('settings.txt_drop_type_2');
 			txt_drop_type[2] = __('settings.txt_drop_type_3');
@@ -510,12 +490,10 @@
 			divColorPal.style.top = (editW2 - divColorPal.offsetHeight/2 ) + 'px';
 			divColorPal.style.visibility = 'hidden';
 
-
 			openAnimationIndex();
 			openAnimation();
 
 			selectEdit({id:'dropFillType', value:'type_1'});
-
 
 			var ctxImp = canvImportedFrames.getContext("2d");
 			ctxImp.font = '20px sans-serif';
@@ -612,6 +590,9 @@
 // ******************** Start Image import code ********************
 
 	var 	imgImport = null,
+		imgImportFile = null,
+		imgImportSource = null,
+		imgImportURL = null,
 		imgImportData,
 		scanAspect = 0, // 0 = Left-Right, 1 = Up-Down
 		imgImportClick = {
@@ -637,11 +618,21 @@
 
 
 	function draw(ev) {
-		if( document.getElementById("uploadimage").files[0] == undefined ){ return;}
+		if( document.getElementById("uploadimage").files[0] == undefined ){
+			f = imgImportFile;
+			url = imgImportURL;
+			src = imgImportSource;
+			return;
+		}
+console.log(document.getElementById("uploadimage").files[0]);
 
 		var	f = document.getElementById("uploadimage").files[0],
 			url = window.URL || window.webkitURL,
 			src = url.createObjectURL(f);
+
+		imgImportFile = f;
+		imgImportURL = url;
+		imgImportSource = src;
 
 		imgImport = new Image();
 
@@ -672,11 +663,12 @@
 			imgImportH = imgImport.height,
 			ctx = canvImport.getContext('2d'),
 			ctx2 = canvImage.getContext('2d'),
-			f = document.getElementById("uploadimage").files[0],
-			url = window.URL || window.webkitURL,
-			src = url.createObjectURL(f);
+			f = imgImportFile,
+			url = imgImportURL,
+			src = imgImportSource;
 
 
+		refreshButtons();
 		// setup preview
 		var zoomFactor = 1 - sliderZoom.value;
 
@@ -1364,17 +1356,28 @@
 			switch( obj.id ){
 
 			case 'but_frame_add':
-			case 'but_frame_copy':
-				ledFrames.splice(selectedFrame+1, 0, ledFrames[selectedFrame]);
+/*
+				ledFrames.splice( selectedFrame + 1, 0, emptyFrame );
+
 				refreshCounter(1);
 				selectedFrame += 1;
 				refreshFramesList();
-
-				if( obj.id == 'but_frame_add' ){
-					for(var i=0; i<24; i++ ){
-						ledFrames[ selectedFrame ][i] = { r:0, g:0, b:0 }
-					}
+				actionUndo();
+				divFrameScroll.scrollTop += document.getElementById('frameLine0').offsetHeight ;
+				break;
+*/
+			case 'but_frame_copy':
+				switch( obj.id ){
+					case 'but_frame_add':
+						ledFrames.splice( selectedFrame + 1, 0, emptyFrame );
+						break;
+					case 'but_frame_copy':
+						var newFrame = [].concat(ledFrames[selectedFrame]);
+						ledFrames.splice(selectedFrame + 1, 0, newFrame);
+						break;
 				}
+				refreshCounter(1);
+				selectedFrame += 1;
 				refreshFramesList();
 				actionUndo();
 				divFrameScroll.scrollTop += document.getElementById('frameLine0').offsetHeight ;
@@ -1544,13 +1547,13 @@
 				xFrame = ledFrames[index];
 				tempDoc = tempDoc + getFrameListRow( index, getTooltip('frame', index + 1) );
 			});
-			docFrames.innerHTML = tempDoc;
+			tableFrames.innerHTML = tempDoc;
 			drawAllFramePreviews();
 			activateSelect();
 		}
 
 		function refreshFrameNr( nr ){
-			nrFrame.innerHTML = 'Frame: ' + nr;
+			frameNumber.innerHTML = 'Frame: ' + nr;
 		}
 
 
@@ -1764,7 +1767,7 @@
 				cB = parseInt(xCol.b.substr(5,2), 16);
 
 			txtLedRing.style.color = xCol.t;
-			nrFrame.style.color = xCol.t;
+			frameNumber.style.color = xCol.t;
 
 			ctxTop.clearRect(0,0,editW,editW);
 			// draw case
@@ -1907,10 +1910,11 @@
 		}
 
 
+// ************** PLAY WITH HOMEY **************
 
-// ************** ANIMATION ENGINE **************
-		var playPrevMode = false;
-		var previewPlayTimer = null;
+		var	playPrevMode = false,
+			previewPlayTimer = null;
+
 		function  clickPrev(obj){
 			playPrevMode = !playPrevMode;
 
@@ -1952,6 +1956,11 @@
 			}
 		}
 
+// ************** END PLAY WITH HOMEY **************
+
+
+// ************** SCREEN ANIMATION ENGINE **************
+
 		var	frameID = 0,
 			playFrame = 0,
 			animationFilm = [],
@@ -1965,7 +1974,11 @@
 		function  clickPlay(obj){
 			playMode = !playMode;
 			if( playMode ){
-				saveAnimation( selectedAnimation );
+				var waitTime = 700;
+				if( undoPointer > 0 ){
+					saveAnimation( selectedAnimation );
+					waitTime = 2000;
+				}
 				obj.innerHTML = '<img src="../assets/images/ani_working.png" height="30" width="30" style="float: center;">';
 					
 				setTimeout( function(){
@@ -1974,7 +1987,7 @@
 					createAnimationFilm();
 					playFrame = 0;
 					frameID = requestAnimationFrame(runAnimation);
-				}, 500)
+				}, waitTime)
 				divEdit.style.visibility = "hidden";
 
 				canvRing2.style.transitionTimingFunction = 'linear';
@@ -2077,7 +2090,7 @@
 			}
 		}
 
-// ************** END ANIMATION ENGINE **************
+// ************** END SCREEN ANIMATION ENGINE **************
 
 
 		function clickColorPalette(obj){
@@ -2113,22 +2126,37 @@
 					case '255,255,255': ledText = txt_bright_white.substr( txt_bright_white.indexOf(' ') + 1 ); break;
 				} 
 			}
+			setColPreviewText( ledText, ledCol );
+/*
 			ledText = ledText.substr(0,1).toUpperCase() + ledText.substr(1).toLowerCase();
 			xCol = contrastBlackOrWhite( ledCol );
 			ctxCol.textAlign = 'center';
 			ctxCol.textBaseline = 'middle';
 			ctxCol.font = '14px helvetica-neue, sans-serif';
 			ctxCol.fillStyle = 'rgba(' + xCol.r + ',' + xCol.g + ',' + xCol.b + ',1)';
-			ctxCol.fillText( ledText, colPreview.width/2, colPreview.height/2 )
+			ctxCol.fillText( ledText, colPreview.width/2, colPreview.height/2 );
+*/
+		}
+
+		function setColPreviewText( ledText, backColor ){
+			var	ctxCol = colPreview.getContext("2d");
+			ledText = ledText.substr(0,1).toUpperCase() + ledText.substr(1).toLowerCase();
+			xCol = contrastBlackOrWhite( backColor );
+			ctxCol.textAlign = 'center';
+			ctxCol.textBaseline = 'middle';
+			ctxCol.font = '14px helvetica-neue, sans-serif';
+			ctxCol.fillStyle = 'rgba(' + xCol.r + ',' + xCol.g + ',' + xCol.b + ',1)';
+			ctxCol.fillText( ledText, colPreview.width/2, colPreview.height/2 );
 		}
 
 		function setColPreviewFill( col1, col2, nStep ){
 			// col1 = undefined, col2 = undefined	: selectedColor
-			// col1 = '', col2 = undefined		: full gradient
+			// col1 = '', col2 = undefined		: b/w gradient
 			// col1 = rgbObj, col2 = undefined	: col1
 			// col1 = rgbObj, col2 = rgbObj		: gradient col1 -> col2
 
 			var	ctxCol = colPreview.getContext("2d");
+			if( nStep == 0 ){ nStep = 1; }
 
 			if( col1 == undefined && col2 == undefined){
 				var xCol = getViewColor( { r:colPal[selectedColor].r, g:colPal[selectedColor].g, b:colPal[selectedColor].b } );
@@ -2148,16 +2176,8 @@
 			} else {
 				var xCol1 = getViewColor( { r:col1.r, g:col1.g, b:col1.b } );
 				var xCol2 = getViewColor( { r:col2.r, g:col2.g, b:col2.b } );
-				if( (xCol1.r + xCol1.g + xCol1.b > 0) && ( xCol2.r + xCol2.g + xCol2.b > 0 ) ){
-/*
-					var stepR = ( xCol2.r - xCol1.r ) / nStep;
-					var stepG = ( xCol2.g - xCol1.g ) / nStep;
-					var stepB = ( xCol2.b - xCol1.b ) / nStep;
 
-					var cR = xCol1.r;
-					var cG = xCol1.g;
-					var cB = xCol1.b;
-*/
+				if( (xCol1.r + xCol1.g + xCol1.b > 0) && ( xCol2.r + xCol2.g + xCol2.b > 0 ) ){
 					var stepR = ( col2.r - col1.r ) / nStep;
 					var stepG = ( col2.g - col1.g ) / nStep;
 					var stepB = ( col2.b - col1.b ) / nStep;
@@ -2166,22 +2186,13 @@
 					var cG = col1.g;
 					var cB = col1.b;
 
+
 					var xGr = 0, stepGr = 1 / (nStep-1);
 					var grd = ctxCol.createLinearGradient( 0, 0, colPreview.width, 0 );
 
 					cR += stepR; cG += stepG; cB += stepB; xGr += stepGr;
 					vCol = getViewColor( { r:cR, g:cG, b:cB } );
-/*
-					grd.addColorStop( 0 ,'rgba('+ Math.round(cG) + ',' + Math.round(cG) + ',' + Math.round(cB) +',1)' );
 
-					while(Math.round(xGr*100)/100 < 1){
-						grd.addColorStop(Math.round(xGr*100)/100  ,'rgba('+ Math.round(cR) + ',' + Math.round(cG) + ',' + Math.round(cB) +',1)' );
-						cR += stepR; cG += stepG; cB += stepB;
-						grd.addColorStop(Math.round(xGr*100)/100  ,'rgba('+ Math.round(cR) + ',' + Math.round(cG) + ',' + Math.round(cB) +',1)' );
-					
-						xGr += stepGr;
-					}
-*/
 					grd.addColorStop( 0 ,'rgba('+ Math.round(vCol.r) + ',' + Math.round(vCol.g) + ',' + Math.round(vCol.b) +',1)' );
 
 					while(Math.round(xGr*100)/100 < 1){
@@ -2341,8 +2352,8 @@
 				}
 				var nStep = ledData[1].led - ledData[0].led; 
 				if( nStep <0 ){ nStep += 24; }
-				
-				setColPreviewFill( { r:ledData[0].r, g:ledData[0].g, b:ledData[0].b }, { r:ledData[1].r, g:ledData[1].g, b:ledData[1].b }, nStep );
+				//setColPreviewFill( { r:ledData[0].r, g:ledData[0].g, b:ledData[0].b }, { r:ledData[1].r, g:ledData[1].g, b:ledData[1].b }, nStep );
+				setColPreviewFill( ledData[0], ledData[1], nStep );
 				break;
 			}
 		}
