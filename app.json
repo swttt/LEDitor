@@ -3,7 +3,7 @@
 	"name": {
 		"en": "LEDitor"
 	},
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"compatibility": "0.x || 1.x",
 	"description": {
 		"en": "Create custom LED Ring animations for Homey",
