@@ -1,13 +1,10 @@
 ## Create custom LED-ring animations.
 
-The user's pleasure is my reward. People who like to show some extra gratitude can buy me a coffee.
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="9NM9BG9QYMMUG" />
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate" />
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-</form>
-
+###v0.1.2
+* Removed bug: Adding a new frame would clear recently created frames.
+* Removed bug: An animation would not always play correct on-screen immediately after being edited.
+* Removed bug: In particular situations, when opening an image was canceled, the user-interface could become unresponsive.
+* Code optimized.
 
 ###v0.1.1
 * Removed bug: Moving a frame up/down and then use undo would result in two corrupted frames and render the animation unusable.
