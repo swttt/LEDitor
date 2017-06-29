@@ -1,48 +1,48 @@
 "use strict";
+var	Animation = Homey.manager('ledring').Animation,
+	frames = [],
+	frame = [];
+
+// save version number as setting, so it's available with index.html
+Homey.manager('settings').set('version', Homey.manifest.version );
 
 function init() {
-	Homey.log('LEDitor started.');
+	Homey.log('LEDitor v' + Homey.manifest.version + ' started.');
 }
 
-var frames = [];
-var frame = [];
-var Animation = Homey.manager('ledring').Animation;
-
 // create animation with 1 empty frame
-for(var i=0; i<24; i++){ frame.push( { r:0,g:0,b:0 } ); }
+for( var i = 0; i < 24; i ++){ frame.push( { r:0, g:0, b:0 } ); }
 frames.push(frame);
 var ani = {
 	frames	: frames,
-	priority: 'FEEDBACK',
+	priority: 'INFORMATIVE',
 	duration: 1000,
 	options	: { fps: 1, tfps: 60, rpm: 0 }
 }
 
 // create initial animation object
 var animation = new Animation({
-	frames	: ani.frames,
+	frames  : ani.frames,
 	priority: ani.priority,
 	duration: ani.duration,
-	options: {
-		fps: ani.options.fps,
-		tfps: ani.options.tfps, 
-		rpm: ani.options.rpm
+	options : {
+		fps : ani.options.fps,
+		tfps: ani.options.tfps,
+		rpm : ani.options.rpm
 	}
-})
+});
 
 // register animation object with Homey
 animation.register(function(err, result){
 	if( err ) return Homey.error(err);
 	animation.start();
 
-	animation.on('start', function(){
-		// The animation has started playing
-		Homey.log('animation ' + animation.id +' started');
+	animation.on('start', function(){	// The animation has started playing
+		Homey.log('Started animation: ' + animation.id );
 	})
 
-	animation.on('stop', function(){
-		// The animation has stopped playing
-		Homey.log('animation ' + animation.id +' stopped');
+	animation.on('stop', function(){	// The animation has stopped playing
+		Homey.log( 'Stopped animation: ' + animation.id );
 	})
 })
 
@@ -52,16 +52,17 @@ Homey.manager('settings')
 	case 'animation':
 		animation.stop();
 		ani = Homey.manager('settings').get('animation');
-		animation.args = { frames	: ani.frames,
-				priority	: ani.priority,
-				transition	: Math.floor( 1000 / ( Number(ani.options.fps) + 1) ),
-				duration	: ani.duration,
-				options		: { fps: ani.options.fps, tfps: ani.options.tfps, rpm: ani.options.rpm }
-		};
+		animation.args = {
+			frames    : ani.frames,
+			priority  : ani.priority,
+			transition: Math.floor( 1000 / ( Number(ani.options.fps) + 1) ),
+			duration  : ani.duration,
+			options   : { fps: ani.options.fps, tfps: ani.options.tfps, rpm: ani.options.rpm }
+		}
 		animation.register(function(err, result){
 			if( err ) return Homey.error(err);
 			animation.start();
-		})
+		});
 		break;
 
 	case 'frame':
@@ -94,7 +95,7 @@ Homey.manager("flow")
 
 Homey.manager('flow')
 	.on('action.animation_select', function( callback, args ){
-	Homey.log(args);
+	//Homey.log(args);
 	var aniId = 'animation' + args.animationSelector.value;
 	var aniDuration = args.animationTime * 1000;
 
@@ -102,8 +103,8 @@ Homey.manager('flow')
 	animation.stop();
 	animation.args = {
 		frames	: ani.frames,
-		priority	: 'FEEDBACK',
-		transition	: Math.floor( 1000 / ( Number(ani.options.fps) + 1) ),
+		priority	: 'INFORMATIVE',
+		transition	: Math.round( 300 / Number(ani.options.fps)  ),
 		duration	: aniDuration,
 		options		: { fps: ani.options.fps, tfps: ani.options.tfps, rpm: ani.options.rpm }
 	};
@@ -118,24 +119,26 @@ Homey.manager('flow')
 Homey.manager('flow')
 	.on('action.animation_stop', function( callback, args ){
 	animation.stop();
-	callback( null, true ); // we've fired successfully
+	callback( null, true ); // fired successfully
 });        
 
 module.exports.init = init;
+
+
 
 /* ************************************************
 - DOC: example registered LED Ring Animation object
 ***************************************************
 Animation {
 	args: {
-		frames:	[ [Object], [Object], .... ],	// array containing frame-arrays containing 24 pixel-objects { r:int, g:int, b:int }}
-		priority: 'INFORMATIVE',		// CRITICAL, FEEDBACK or INFORMATIVE
-		transition: 300,
-		duration: 2000,				// duration in ms, or '' for infinite
-		options: {
-			fps: '1', 			// frame change per second
-			tfps: '60', 			// interpolated frames per second.
-			rpm: '0'			// ring rotations per minute
+		frames    : [ [Object], [Object], .... ],	// array, containing max 200 frame-arrays, containing 24 pixel-objects { r:int, g:int, b:int }}
+		priority  : 'INFORMATIVE',			// CRITICAL, FEEDBACK or INFORMATIVE
+		transition: 300,				// transition time between 2 frames ????
+		duration  : 1000,				// duration in ms, or '' for infinite
+		options   : {
+			fps : '1',				// frame change per second
+			tfps: '60',				// interpolated frames per second.
+			rpm : '0'				// ring rotations per minute
 		}
 	},
 	id: '5352c7db-be14-4b10-9a9d-939023667288',
