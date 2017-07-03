@@ -27,6 +27,14 @@ The user's pleasure is my reward. People who like to show some extra gratitude c
 
 
 ## What happened so far...
+### v0.2.1
+* Removed bug: Internal color vector was not updated after selecting a color for the generator and returning to the editor. This made the generator trigger whenever color changes for the editor were expected.
+* Removed bug: On-screen LED ring display did not update anymore with Solid Fill or Gradient Fill buttons.
+* Removed bug: Frame counter did not update with Undo or Redo. 
+* Updated 'Save LEDitor animation' window.
+* Added missing translations and help texts.
+* Small fixes / changes.
+
 ### v0.2.0
 * Added the ability to save and (re)load animations, which allows for back-ups and exchange with other users.
 * Included a generator which produces all the patterns from the "LED-ring collection" with user definable colors and settings.
