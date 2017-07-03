@@ -1,10 +1,11 @@
 {
     "settings": {
-        "intro": "LEDitor offers the possibility to create customized LED Ring animations. The animations can be selected with flow cards and played for an adjustable time.",
+        "intro": "offers the possibility to create customized LED Ring animations. The animations can be selected with flow cards and played for an adjustable time.",
 	"header_editor": "LED editor",
         "header_frame": "&nbsp;Frame",
         "header_colors": "&nbsp;Color pattern",
         "header_generator": "Animation generator",
+	"header_export": "Save LEDitor animation",
         "animation_button_copy": "Copy mode",
         "info_load": "Opening animation...",
 
@@ -150,6 +151,8 @@
 	"help_checkAllFrames": "Rotate or fill all frames at once.",
 	"help_but_ani_open": "Open an animation image. These images include, in addition to the colors for the LEDs, the animation name and settings for FPS, IFPS and RPM.",
 	"help_but_ani_store": "Save an animation image. These images include, in addition to the colors for the LEDs, the animation name and settings for FPS, IFPS and RPM. These images can be used as backups and shared with other users.",
+	"help_but_export_cancel": "Leave animation export and return to the editor.",
+
 	"help_but_ani_generator": "Use the built-in animation generator with your own settings.",
 	"help_but_generator_close": "Return to the LED editor for manual adjustments.",
 	"help_but_frame_add": "Add a new frame after the selected frame.",
@@ -173,6 +176,7 @@
 	"help_canvImportedFrames": "Here you will see how the colors from an image are used in frames. Frames are displayed from top to bottom. Each frame displays 24 LED colors from left to right. Disabled LEDs are displayed with a dot. The central vertical marker shows the position of LED 1.",
 	"help_but_import_cancel": "Return to the editor without importing the image. As long as you do not leave the LEDitor settings, you can return here to continue working with the current image.",
 	"help_but_import_accept": "Accept the displayed settings. All existing frames of the selected animation will be erased and replaced by the new image frames. As long as you do not leave the LEDitor settings, you can return here to make adjustments.",
+
 	"help_dropGenerator": "Select an animation.",
 	"help_checkRandomColors": "Use random colors for the animation.",
 	"help_checkFullFlow": "Use a full gradient (red, yellow, green, cyan, blue and magenta) for the animation.",
