@@ -1,10 +1,11 @@
 {
     "settings": {
-        "intro": "LEDitor biedt de mogelijkheid om eigen LED Ring animaties te maken. De animaties kunnen met flow-kaarten geselecteerd worden en gedurende een instelbare tijd worden afgespeeld.",
+        "intro": "biedt de mogelijkheid om eigen LED Ring animaties te maken. De animaties kunnen met flow-kaarten geselecteerd worden en gedurende een instelbare tijd worden afgespeeld.",
 	"header_editor": "LED editor",
         "header_frame": "&nbsp;Frame",
         "header_colors": "&nbsp;Kleur patroon",
         "header_generator": "Animatie generator",
+	"header_export": "Bewaar LEDitor animatie",
         "animation_button_copy": "Kopie modus",
         "info_load": "Animatie openen...",
 
@@ -149,6 +150,8 @@
 	"help_checkAllFrames": "Roteer of vul alle frames tegelijk.",
 	"help_but_ani_open": "Open een animatie-afbeelding. Deze afbeeldingen bevatten behalve de kleuren voor de LED's ook de animatie-naam en de instellingen voor FPS, IFPS en RPM.",
 	"help_but_ani_store": "Bewaar een animatie-afbeelding. Deze afbeeldingen bevatten behalve de kleuren voor de LED's ook de animatie-naam en de instellingen voor FPS, IFPS en RPM. Deze afbeeldingen kunnen worden gebruikt als back-up en met andere gebruikers worden gedeeld.",
+	"help_but_export_cancel": "Verlaat animatie export en keer terug naar de editor.",
+
 	"help_but_ani_generator": "Gebruik de ingebouwde animatie-generator met je eigen instellingen.",
 	"help_but_generator_close": "Keer terug naar de LED editor voor handmatige aanpassingen.",
 	"help_but_frame_add": "Een nieuw frame toevoegen na het geselecteerde frame.",
@@ -172,6 +175,7 @@
 	"help_canvImportedFrames": "Hier zie je hoe de kleuren uit een afbeelding in frames worden gebruikt. Frames worden van boven naar onder weergegeven. Per frame worden de 24 LED-kleuren van links naar rechts afgebeeld. Uitgeschakelde LED's worden weergegeven met een punt. De centrale verticale markering toont de positie van LED 1.",
 	"help_but_import_cancel": "Keer terug naar de editor zonder de afbeelding te importeren. Zolang je de LEDitor-instellingen niet verlaat, kun je hier terugkeren om verder te werken met de huidige afbeelding.",
 	"help_but_import_accept": "Accepteer de weergegeven instellingen. Alle bestaande frames van de geselecteerd animatie worden gewist en vervangen door de afbeelding-frames. Zolang je de LEDitor-instellingen niet verlaat, kun je hier terugkeren om aanpassingen te doen.",
+
 	"help_dropGenerator":"Selecteer een animatie.",
 	"help_checkRandomColors":"Gebruik willekeurige kleuren voor de animatie.",
 	"help_checkFullFlow":"Gebruik een volledig kleurverloop (rood, geel, groen, cyaan, blauw en magenta) voor de animatie.",
