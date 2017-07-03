@@ -1,33 +1,33 @@
 var 	selectedColor = 0,
 	stepColBright = 7,
 	colBase = [
-		{ r:127, g:127, b:127 },
-		{ r:255, g:  0, b:  0 },
-		{ r:255, g: 85, b:  0 },
-		{ r:255, g:170, b:  0 },
-		{ r:255, g:255, b:  0 },
-		{ r:170, g:255, b:  0 },
-		{ r: 85, g:255, b:  0 },
-		{ r:  0, g:255, b:  0 },
-		{ r:  0, g:255, b: 85 },
-		{ r:  0, g:255, b:170 },
-		{ r:  0, g:255, b:255 },
-		{ r:  0, g:170, b:255 },
-		{ r:  0, g: 85, b:255 },
-		{ r:  0, g:  0, b:255 },
-		{ r: 85, g:  0, b:255 },
-		{ r:170, g:  0, b:255 },
-		{ r:255, g:  0, b:255 },
-		{ r:255, g:  0, b:170 },
-		{ r:255, g:  0, b: 85 }
+		{r:127, g:127, b:127},
+		{r:255, g:  0, b:  0},
+		{r:255, g: 85, b:  0},
+		{r:255, g:170, b:  0},
+		{r:255, g:255, b:  0},
+		{r:170, g:255, b:  0},
+		{r: 85, g:255, b:  0},
+		{r:  0, g:255, b:  0},
+		{r:  0, g:255, b: 85},
+		{r:  0, g:255, b:170},
+		{r:  0, g:255, b:255},
+		{r:  0, g:170, b:255},
+		{r:  0, g: 85, b:255},
+		{r:  0, g:  0, b:255},
+		{r: 85, g:  0, b:255},
+		{r:170, g:  0, b:255},
+		{r:255, g:  0, b:255},
+		{r:255, g:  0, b:170},
+		{r:255, g:  0, b: 85}
 	];
 
-	// create LED color pool colPal[ {r,g,b}, {r,g,b}, ... ]
+	// create LED color pool colPal[{r,g,b}, {r,g,b}, ...]
 	var colPal = [];
 	var hR = 0, hG = 0, hB = 0, vR = 0, vG = 0, vB = 0, lR = 0, lG = 0, lB = 0;
-	for( var j=0; j< stepColBright*2+1 ; j++){
-		for( var i=0; i<colBase.length; i++){
-			var xDivider = stepColBright; if(i == 0 ){ xDivider ++;}
+	for(var j=0; j< stepColBright*2+1 ; j++){
+		for(var i=0; i<colBase.length; i++){
+			var xDivider = stepColBright; if(i == 0){xDivider ++;}
 			hR = Number(colBase[i].r);
 			hG = Number(colBase[i].g);
 			hB = Number(colBase[i].b);
@@ -36,65 +36,65 @@ var 	selectedColor = 0,
 			vR = hR; vG = hG; vB = hB;
 								
 			// ledcolors
-			if( j < stepColBright ){ // brighter
-				if( i==0 && j==0){
+			if(j < stepColBright){// brighter
+				if(i==0 && j==0){
 					hR = 255; hG = 255; hB = 255;
 				} else {
 					
-					if( hR < 255 ){
-						hR = hR + (255 - hR)/stepColBright * ( stepColBright -j )*0.75;
+					if(hR < 255){
+						hR = hR + (255 - hR)/stepColBright * (stepColBright -j)*0.75;
 					}
-					if( hG < 255 ){
-						hG = hG + (255 - hG)/stepColBright * ( stepColBright -j )*0.75;
+					if(hG < 255){
+						hG = hG + (255 - hG)/stepColBright * (stepColBright -j)*0.75;
 					}
-					if( hB < 255 ){
-						hB = hB + (255 - hB)/stepColBright * ( stepColBright -j )*0.75;
+					if(hB < 255){
+						hB = hB + (255 - hB)/stepColBright * (stepColBright -j)*0.75;
 					}
 					
-					hR = Math.round( hR );
-					hG = Math.round( hG );
-					hB = Math.round( hB );
+					hR = Math.round(hR);
+					hG = Math.round(hG);
+					hB = Math.round(hB);
 				}
 
-			} else if( j > stepColBright ){ // darker
+			} else if(j > stepColBright){// darker
 					
 				//lR = hR; lG = hG; lB = hB;
 
-				if( hR >= hG && hR >= hB){
-					hR = lR / Math.pow(2, (j- stepColBright )*0.7);
+				if(hR >= hG && hR >= hB){
+					hR = lR / Math.pow(2, (j- stepColBright)*0.7);
 					hG = lG/lR * hR;
 					hB = lB/lR * hR;
-				} else if( hG >= hR && hG >= hB){
-					hG = lG / Math.pow(2, (j- stepColBright )*0.7);
+				} else if(hG >= hR && hG >= hB){
+					hG = lG / Math.pow(2, (j- stepColBright)*0.7);
 					hR = lR/lG * hG;
 					hB = lB/lG * hG;
 				} else {
-					hB = lB / Math.pow(2, (j- stepColBright )*0.7);
+					hB = lB / Math.pow(2, (j- stepColBright)*0.7);
 					hR = lR/lB * hB;
 					hG = lG/lB * hB;
 				}
 				
-				hR = Math.round( hR );
-				hG = Math.round( hG );
-				hB = Math.round( hB );
+				hR = Math.round(hR);
+				hG = Math.round(hG);
+				hB = Math.round(hB);
 										
-				if( hR > 0 ){ hR -= 1; }
-				if( hG > 0 ){ hG -= 1; }
-				if( hB > 0 ){ hB -= 1; }
+				if(hR > 0){hR -= 1;}
+				if(hG > 0){hG -= 1;}
+				if(hB > 0){hB -= 1;}
 			}
 
-			if( hR == 3 &&  hG == 3 &&  hB == 3){
+			if(hR == 3 &&  hG == 3 &&  hB == 3){
 				hR = 0;
 				hG = 0;
 				hB = 0;
 				selectedColor = colBase.length * j + i;
 			}
-			colPal[colBase.length * j + i] = { r:hR, g:hG, b:hB }
+			colPal[colBase.length * j + i] = {r:hR, g:hG, b:hB}
 		}
 	}
 
 		
-function getViewColor( colObj ){
+function getViewColor(colObj){
 	var	hR = Number(colObj.r), hG = Number(colObj.g), hB = Number(colObj.b),
 		vR = hR, vG = hG, vB = hB;
 
@@ -103,16 +103,16 @@ function getViewColor( colObj ){
 		upDisp = 210,	// max r, g or b below 255 for screen
 		lowLED = 2,	// min r, g or b above 0 for LEDs
 		lowDisp = 35,	// min r, g or b above 0 for screen
-		mult = ( upDisp - lowDisp ) / Math.sqrt(upLED - lowLED);
+		mult = (upDisp - lowDisp) / Math.sqrt(upLED - lowLED);
 	
-	if( hR<255 && hG<255 && hB<255 && !( hR+hG+hB == 0 )){
+	if(hR<255 && hG<255 && hB<255 && !(hR+hG+hB == 0)){
 
-		if( hR >= hG && hR >= hB){
+		if(hR >= hG && hR >= hB){
 			vR = lowDisp + Math.sqrt(hR) * mult;
 			vG = hG/hR * vR;
 			vB = hB/hR * vR;
 
-		} else if( hG >= hR && hG >= hB){
+		} else if(hG >= hR && hG >= hB){
 			vG = lowDisp + Math.sqrt(hG) * mult;
 			vR = hR/hG * vG;
 			vB = hB/hG * vG;
@@ -123,24 +123,24 @@ function getViewColor( colObj ){
 			vG = hG/hB * vB;
 		}
 	} else {
-		vR = hR * 1.068; if( vR > 255 ){ vR = 255; }
-		vG = hG * 1.068; if( vG > 255 ){ vG = 255; }
-		vB = hB * 1.068; if( vB > 255 ){ vB = 255; }
+		vR = hR * 1.068; if(vR > 255){vR = 255;}
+		vG = hG * 1.068; if(vG > 255){vG = 255;}
+		vB = hB * 1.068; if(vB > 255){vB = 255;}
 	}
-	vR = Math.round( vR );
-	vG = Math.round( vG );
-	vB = Math.round( vB );
+	vR = Math.round(vR);
+	vG = Math.round(vG);
+	vB = Math.round(vB);
 
-	return { r:vR, g:vG, b:vB };
+	return {r:vR, g:vG, b:vB};
 }
 
-function contrastBlackOrWhite( contrastColor ){ // { r:x, g:x, b:x }
-	if( contrastColor.r * 0.3 + contrastColor.g* 0.6 + contrastColor.b * 0.1 > 118 ){
+function contrastBlackOrWhite(contrastColor){// {r:x, g:x, b:x}
+	if(contrastColor.r * 0.3 + contrastColor.g* 0.6 + contrastColor.b * 0.1 > 118){
 		var xR = 0, xG = 0, xB= 0;
 	} else {
 		var xR = 255, xG = 255, xB= 255;
 	}
-	return { r:xR, g:xG, b:xB };
+	return {r:xR, g:xG, b:xB};
 }
 
 function rgbToHsl(r, g, b) {
@@ -159,7 +159,7 @@ function rgbToHsl(r, g, b) {
 		}
 		h /= 6;
 	}
-	return [ h, s, l ];
+	return [h, s, l];
 }
 
 function hslToRgb(h, s, l) {
@@ -181,7 +181,7 @@ function hslToRgb(h, s, l) {
 		g = hue2rgb(p, q, h);
 		b = hue2rgb(p, q, h - 1/3);
 	}
-	return { r:r * 255, g:g * 255, b:b * 255 };
+	return {r:r * 255, g:g * 255, b:b * 255};
 }
 
 
