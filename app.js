@@ -3,12 +3,13 @@ var	Animation = Homey.manager('ledring').Animation,
 	frames = [],
 	frame = [];
 
-// save version number as setting, so it's available with index.html
-Homey.manager('settings').set('version', Homey.manifest.version );
-
+Homey.log('LEDitor initializing...');
 function init() {
 	Homey.log('LEDitor v' + Homey.manifest.version + ' started.');
 }
+
+// save version number as setting, so it's available for index.html
+Homey.manager('settings').set('version', Homey.manifest.version );
 
 // create animation with 1 empty frame
 for( var i = 0; i < 24; i ++){ frame.push( { r:0, g:0, b:0 } ); }
@@ -18,6 +19,25 @@ var ani = {
 	priority: 'INFORMATIVE',
 	duration: 1000,
 	options	: { fps: 1, tfps: 60, rpm: 0 }
+}
+
+
+
+// check for initial animation data and create it if not defined.
+var aIndex = Homey.manager('settings').get('aniIndex');
+if (aIndex == undefined){
+	// create empty memory slots
+	Homey.log('Creating initial animation presets.');
+	aIndex = [];
+	for(var i=0; i<30; i++){
+		aIndex.push({name: ('Empty preset ' + (i+1))});
+		var aniId = 'animation' + i;
+
+		Homey.manager('settings').set(aniId, ani );
+	}
+	Homey.manager('settings').set('aniIndex', aIndex );
+} else {
+	Homey.log('Animation presets found');
 }
 
 // create initial animation object
@@ -84,7 +104,6 @@ Homey.manager("flow")
 			for( i=0; i<30; i++){
 				var xNum = (i+1).toString(); if(xNum.length<2){xNum = '0' + xNum;}
 				values[i] = {
-					//name: "Animation " + (i+1),
 					name: xNum + ': '+ aniIndex[i].name,
 					value: i
 				}
@@ -94,33 +113,35 @@ Homey.manager("flow")
 	);
 
 Homey.manager('flow')
-	.on('action.animation_select', function( callback, args ){
-	//Homey.log(args);
-	var aniId = 'animation' + args.animationSelector.value;
-	var aniDuration = args.animationTime * 1000;
+	.on('action.animation_select',
+		function( callback, args ){
+			var aniId = 'animation' + args.animationSelector.value;
+			var aniDuration = args.animationTime * 1000;
 
-	ani = Homey.manager('settings').get(aniId);
-	animation.stop();
-	animation.args = {
-		frames	: ani.frames,
-		priority	: 'INFORMATIVE',
-		transition	: Math.round( 300 / Number(ani.options.fps)  ),
-		duration	: aniDuration,
-		options		: { fps: ani.options.fps, tfps: ani.options.tfps, rpm: ani.options.rpm }
-	};
-	animation.register(function(err, result){
-		if( err ) return Homey.error(err);
-		animation.start();
-	});
-
-	callback( null, true ); // fired successfully
-});        
+			ani = Homey.manager('settings').get(aniId);
+			animation.stop();
+			animation.args = {
+				frames	: ani.frames,
+				priority	: 'INFORMATIVE',
+				transition	: Math.round( 300 / Number(ani.options.fps)  ),
+				duration	: aniDuration,
+				options		: { fps: ani.options.fps, tfps: ani.options.tfps, rpm: ani.options.rpm }
+			};
+			animation.register(function(err, result){
+				if( err ) return Homey.error(err);
+				animation.start();
+			});
+			callback( null, true ); // fired successfully
+		}
+	);        
 
 Homey.manager('flow')
-	.on('action.animation_stop', function( callback, args ){
-	animation.stop();
-	callback( null, true ); // fired successfully
-});        
+	.on('action.animation_stop',
+		function( callback, args ){
+			animation.stop();
+			callback( null, true ); // fired successfully
+		}
+	);        
 
 module.exports.init = init;
 
