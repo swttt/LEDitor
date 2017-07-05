@@ -241,6 +241,7 @@
 			}
 			topColor = tColor;
 			drawTop();
+			refreshFramesList();
 		});
 
 		// create color selection palette.
@@ -322,7 +323,7 @@
 	}
 
 
-// ******************** In-app help ********************
+	// ******************** In-app help ********************
 	function showHelp(obj, event){
 		var	docHelp = document.getElementById('helpInfoArea'),
 			id = obj.id;
@@ -462,7 +463,7 @@
 
 
 
-// ******************** Save LEDitor data-image ********************
+	// ******************** Save LEDitor data-image ********************
 	var storeLeditorOn = false;
 
 	function storeLeditor() {
@@ -537,7 +538,7 @@
 	}
 
 
-// ******************** Load saved LEDitor data-image ********************
+	// ******************** Load saved LEDitor data-image ********************
 	function loadLeditor(ev) {
 		if(document.getElementById("openLeditor").files[0] == undefined){//canceled
 			return;
@@ -633,8 +634,7 @@
 	document.getElementById("openLeditor").addEventListener("change", loadLeditor, false);
 
 
-// ******************** Start Image import code ********************
-
+	// ******************** Start Image import code ********************
 	var 	imgImport = null,
 		imgImportFile = null,
 		imgImportSource = null,
@@ -1129,8 +1129,7 @@
 		document.getElementById('editor').style.visibility = 'visible';
 		clearInterval(blinkInterval);
 	}
-
-// ******************** End Image import ********************
+	// ******************** End Image import ********************
 
 
 	var aniIndex = [];
@@ -2356,8 +2355,7 @@
 	}
 
 
-// ************** PLAY WITH HOMEY **************
-
+	// ************** PLAY WITH HOMEY **************
 	var	playPrevMode = false,
 		previewPlayTimer = null;
 
@@ -2403,12 +2401,10 @@
 			});
 		}
 	}
+	// ************** END PLAY WITH HOMEY **************
 
-// ************** END PLAY WITH HOMEY **************
 
-
-// ************** SCREEN ANIMATION ENGINE **************
-
+	// ************** SCREEN ANIMATION ENGINE **************
 	var	frameID = 0,
 		playFrame = 0,
 		animationFilm = [],
@@ -2546,8 +2542,7 @@
 			animationFilm[i] = ctxRing.getImageData(0,0,400,400);
 		}
 	}
-
-// ************** END SCREEN ANIMATION ENGINE **************
+	// ************** END SCREEN ANIMATION ENGINE **************
 
 
 	function clickColorPalette(obj){
@@ -3149,7 +3144,7 @@
 		but_import_cancel.disabled = true;
 		but_scan_direction.disabled = true;
 
-		if(butOn && !playMode) {
+		if(butOn && !playMode && !storeLeditorOn) {
 			if(storeLeditorOn){
 				but_ani_generator.style.visibility = 'hidden';
 			}else {
