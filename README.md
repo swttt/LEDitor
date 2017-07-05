@@ -5,6 +5,8 @@
 * Use generators to create basic animations with a few mouse clicks.
 * Save your creations and exchange them with your Homey friends.
 
+NOTE: Homey's screensavers wont work when the animations are active. Take that in consideration in case you are using screensavers for notifications. Homey's built-in animations will pause-and-continue the LEDitor animations.
+
 
 The user's pleasure is my reward. People who like to show some extra gratitude can buy me a coffee.
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -27,6 +29,11 @@ The user's pleasure is my reward. People who like to show some extra gratitude c
 
 
 ## What happened so far...
+### v0.2.2
+* Removed bug: When accessing flow actions before the settings page was visited, LEDitor would crash.
+* Straightened a few wrinkles in the user interface.
+* Less storage because of removing unnecessary images from install.
+
 ### v0.2.1
 * Removed bug: Internal color vector was not updated after selecting a color for the generator and returning to the editor. This made the generator trigger whenever color changes for the editor were expected.
 * Removed bug: On-screen LED ring display did not update anymore with Solid Fill or Gradient Fill buttons.
