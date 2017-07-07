@@ -3,313 +3,553 @@
 	<head>
 		<script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
 		<style>
-			a:link {text-decoration: none; color: black;}
-			a:visited {text-decoration: none; color: black;}
-			a:hover {text-decoration: none; color: white; background-color: red; font-weight: bold;}
-			a:active {text-decoration: none; color: black;}
-			button {width:40px; height:35px; padding: 0px 0px;}
-
-			.buttonEdit{
-				width:40px;
-				height:32px;
-				padding: 0px 0px;
+			a:link {
+				text-decoration: none;
+				color: black;
+			}
+			a:visited {
+				text-decoration: none;
+				color: black;
+			}
+			a:hover {
+				text-decoration: none;
+				color: white;
+				background-color: red;
+				font-weight: bold;
+			}
+			a:active {
+				text-decoration: none;
+				color: black;
+			}
+			button {
+				width: 40px;
+				height: 35px;
+				padding: 0;
 			}
 
-			.sliderImport{
-				position:relative;
-				left:-25px;
-				top:50px;
-				width:80px;
-				height:20px;
-				padding: 0px 0px;
-				border:0px;
+			.buttonEdit {
+				width: 40px;
+				height: 32px;
+				padding: 0;
+			}
+
+			.sliderImport {
+				position: relative;
+				left: -25px;
+				top: 50px;
+				width: 80px;
+				height: 20px;
+				padding: 0;
+				border: 0;
 				transform: rotate(-90deg);
 			}
+
 		</style>
 		<script type="text/javascript" src="colors.js"></script>
 		<script type="text/javascript" src="generators.js"></script>
 	</head>
-	<body onunload="saveAnimation(selectedAnimation);">
-	<table style="width:100%;">
-	<tr style="height:90px;"><td>
-		<table style="width: 100%;">
+	<body onunload="console.log('Loading!')">
+		<table style="width:100%;">
 			<tr style="height:90px;">
-				<td style="vertical-align:top;">
-					<font size="5">LEDitor </font><span id="versionNr" style="font-size:12px;"></span>
-					<div id="helpInfoArea" data-i18n="settings.intro"></div>
-				</td>
-				<td style="vertical-align:top;">
-					<img src="../assets/icon.svg" height="40" width="40" style="float: right;">
+				<td>
+					<table style="width: 100%;">
+						<tr style="height:90px;">
+							<td style="vertical-align:top;">
+								<font size="5">LEDitor
+								</font>
+								<span id="versionNr" style="font-size:12px;"></span>
+								<div id="helpInfoArea" data-i18n="settings.intro"></div>
+							</td>
+							<td style="vertical-align:top;">
+								<img src="../assets/icon.svg" height="40" width="40" style="float: right;">
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
-		</table>
-	</td></tr>
-	<tr><td >
-		<table id="editor" style="position:absolute; width:840px; border-collapse: collapse;">
-		<tr style="border: 1px solid Gainsboro;">
-			<td colspan=3>
-				<!-- **** Top Bar **** -->
-				<table style="width:840px; height:32px; border-collapse: collapse;">
-					<tr style="height: 32px;">
-						<td style="width:35px; text-align: left;">
-							<button id="but_copy_ani" title="copy full animation from..." style="position:relative; left:0px; top:0px; width:35px; height:32px; vertical-align:middle; padding: 0px 0px;" onclick = "clickAniCopy(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_copy.png" height="30" width="30" style="float: center;"></button>
-						</td>
-						<td style="width: 120px; height: 32px; text-align: left;">
-							<div style=" position:relative; top:0px; left:0px; width:120px; height:32px;">
-								<select id="dropAnimation" name="dropAnimation" style="position:absolute; top:0px; left:0px; width: 120px; height:32px; padding:0px 0px;" onclick = "selectAnimation(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
-								<option value=""></option>
-								</select>
-								<input id="inName" type="text" style="position:absolute; left:4px; top:4px; width:108px; height:20px; padding:0px 0px; border: 2px inset; visibility:hidden;" oninput="changeAniName(this);" onkeydown="checkForKey(this, event);" onchange="" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Enter animation name" />
-							</div>
+			<tr>
+				<td >
+					<table id="editor" style="position:absolute; width:840px; border-collapse: collapse;">
+						<tr style="border: 1px solid Gainsboro;">
+							<td colspan=3>
+								<!-- **** Top Bar **** -->
+								<table style="width:840px; height:32px; border-collapse: collapse;">
+									<tr style="height: 32px;">
+										<td style="width:35px; text-align: left;">
+											<button
+												id="but_copy_ani"
+												title="copy full animation from..."
+												style="position:relative; left:0px; top:0px; width:35px; height:32px; vertical-align:middle; padding: 0px 0px;"
+												onclick="clickAniCopy(this);"
+												onmouseover="showHelp(this, event)"
+												onmouseout="showHelp(this, event)"><img src="../assets/images/ani_copy.png" height="30" width="30" style="float: center;"></button>
+										</td>
+										<td style="width: 120px; height: 32px; text-align: left;">
+											<div style=" position:relative; top:0px; left:0px; width:120px; height:32px;">
+												<select id="dropAnimation" name="dropAnimation" style="position:absolute; top:0px; left:0px; width: 120px; height:32px; padding:0px 0px;" onclick="selectAnimation(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+													<option value=""></option>
+												</select>
+												<input
+													id="inName"
+													type="text"
+													style="position:absolute; left:4px; top:4px; width:108px; height:20px; padding:0px 0px; border: 2px inset; visibility:hidden;"
+													oninput="changeAniName(this);"
+													onkeydown="checkForKey(this, event);"
+													onchange=""
+													onmouseover="this.focus(); showHelp(this, event);"
+													onmouseout="showHelp(this, event)"
+													titel="Enter animation name"/>
+											</div>
 
-						</td>
-						<td style="width:35px; text-align: left;">
-							<button id="but_rename_ani" title="click to rename animation" style="position:relative; left:0px; top:0px; width:35px; height:32px; vertical-align:middle; padding: 0px 0px;" onclick = "clickAniRename(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_rename.png" height="30" width="30" style="float: center;"></button>
-						</td>
-						<td style="width:80px; text-align: right;">
-							<div id="frameCount" title=""></div>
-						</td>
-						<td style="text-align: left;">
-								&nbsp;@ <input style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inFPS" type="number" value="5" min="1" max="30" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Frames Per Second" /> FPS,
-								&nbsp;<input style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inTFPS" type="number" value="60" min="1" max="60" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Interpolated Frames Per Second" /> IFPS.
+										</td>
+										<td style="width:35px; text-align: left;">
+											<button
+												id="but_rename_ani"
+												title="click to rename animation"
+												style="position:relative; left:0px; top:0px; width:35px; height:32px; vertical-align:middle; padding: 0px 0px;"
+												onclick="clickAniRename(this);"
+												onmouseover="showHelp(this, event)"
+												onmouseout="showHelp(this, event)"><img src="../assets/images/ani_rename.png" height="30" width="30" style="float: center;"></button>
+										</td>
+										<td style="width:80px; text-align: right;">
+											<div id="frameCount" title=""></div>
+										</td>
+										<td style="text-align: left;">
+											&nbsp;@
+											<input
+												style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+												id="inFPS"
+												type="number"
+												value="5"
+												min="1"
+												max="30"
+												oninput="changeNumberSetting(this);"
+												onmouseover="this.focus(); showHelp(this, event);"
+												onmouseout="showHelp(this, event)"
+												titel="Frames Per Second"/>
+											FPS, &nbsp;<input
+												style="width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+												id="inTFPS"
+												type="number"
+												value="60"
+												min="1"
+												max="60"
+												oninput="changeNumberSetting(this);"
+												onmouseover="this.focus(); showHelp(this, event);"
+												onmouseout="showHelp(this, event)"
+												titel="Interpolated Frames Per Second"/>
+											IFPS.
 
-						</td>
-						<td style="text-align: left;" id="aniTime">xxx.x sec.
-						</td>
-						<td style="text-align: left;">
-							<input style="width:40px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" id="inRPM" type="number" value="0" min="-127" max="127" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" titel="Rotations Per Minute" /> RPM.
-						</td>
-						<td style="width:100px;">
-							<div style=" position:relative; top:0px; left:0px; width:140px; height:32px;">
-							<button id="butPlay" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickPlay(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_play.png" height="30" width="30" style="float: center;"></button>
-							<button id="butPreview" class="buttonEdit" style="position:absolute; left:50px; top:0px;" onclick="clickPrev(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/homey_play.png" height="30" width="30" style="float: center;"></button>
-							<div style="position:absolute; left:91px; top:6px; width:30px; height:20px; padding:0px 2px;">x</div>
-							<input id="inRepeat" style="position:absolute; left:102px; top:6px; width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" type="number" value="1" min="1" max="20" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" />
-							</div>
-						</td>
-						<td style="width:40px; font-size:12px; text-align:center;" id="repeatTime">00:00
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:400px; vertical-align: top;">
-				<!-- list header -->
-				<table style="width: 100%; border: 1px solid Gainsboro; border-collapse: collapse;">
-					<tr style="background-color: Gainsboro;">
-						<th id="headerFrame" title="" style="width: 40px; text-align: center;" data-i18n="settings.header_frame"></th>
-						<th id="headerColors" title="" style="width: 240px; text-align: center;" data-i18n="settings.header_colors"></th>
-						<td style="width: 120px;">
-						</td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-				<!-- frames list -->
-				<div id="divFrameScroll" style="width: 400px; height: 377px; border: 1px solid Gainsboro; overflow: auto;">
-					<table id="tableFrames" style="width: 100%; border-collapse: collapse;" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></table>
-				</div>
-				<div id="divButtons" style=" position:relative; top:0px; left:0px; width:400px; height:32px;">
-					<!-- frame add/copy/import buttons -->
-					<input type="file" accept="image/*" size="30" id="openLeditor" style="position:absolute; left:0px; top:0px; visibility:hidden;" />
-					<button id="but_ani_open" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_open.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_ani_store" class="buttonEdit" style="position:absolute; left:40px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_store.png" height="30" width="30" style="float: center;"></button>
-
-					<button id="but_frame_add" class="buttonEdit" style="position:absolute; left:90px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/frame_new.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_frame_copy" class="buttonEdit" style="position:absolute; left:130px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/frame_duplicate.png" height="30" width="30" style="float: center;"></button>
-
-					<button id="but_ani_fill_flow" class="buttonEdit" style="position:absolute; left:180px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_fill_flow.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_ani_fill_connect" class="buttonEdit" style="position:absolute; left:220px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_fill_connect.png" height="30" width="30" style="float: center;"></button>
-
-					<button id="but_image_import" class="buttonEdit" style="position:absolute; left:360px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/image_import.png" height="30" width="30" style="float: center;"></button>
-					
-					<button id="but_generator_close" class="buttonEdit" style="position:absolute; left:400px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_ani_generator" class="buttonEdit" style="position:absolute; left:400px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_generator.png" height="30" width="30" style="float: center;"></button>
-					
-					<svg height="40" width="350" style="position:absolute; top:0px; left:490px; width:350px; height:40px;">
-							<line id="lineFrameAccess0" stroke-dasharray="1, 3" x1="20" y1="39" x2="265" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-
-							<line id="lineFrameAccess1" stroke-dasharray="1, 3" x1="20" y1="34" x2="20" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess2" stroke-dasharray="1, 3" x1="60" y1="34" x2="60" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess3" stroke-dasharray="1, 3" x1="110" y1="34" x2="110" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess4" stroke-dasharray="1, 3" x1="150" y1="34" x2="150" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess5" stroke-dasharray="1, 3" x1="200" y1="34" x2="200" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess6" stroke-dasharray="1, 3" x1="240" y1="34" x2="240" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;" />
-							<line id="lineFrameAccess7" stroke-dasharray="1, 3" x1="275" y1="25" x2="265" y2="39" style="stroke:rgb(0,0,0); stroke-width:1.3;" />
-					</svg>
-					<button id="but_frame_clock" class="buttonEdit" style="position:absolute; left:490px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/rotate_clockwise.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_frame_counterclock" class="buttonEdit" style="position:absolute; left:530px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/rotate_counter_clockwise.png" height="30" width="30" style="float: center;"></button>
-
-					<button id="but_frame_push" class="buttonEdit" style="position:absolute; left:580px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/shift_back.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_frame_pull" class="buttonEdit" style="position:absolute; left:620px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/shift_front.png" height="30" width="30" style="float: center;"></button>
-
-					<button id="but_edit_fill" class="buttonEdit" style="position:absolute; left:670px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/fill_solid.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_edit_flow" class="buttonEdit" style="position:absolute; left:710px; top:0px;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/fill_flow.png" height="30" width="30" style="float: center;"></button>
-					<div style="position:absolute; left:764px; top:5px; width:80px; height:32px; font-size:11px;">
-						<input type="checkbox" id="checkAllFrames" style="cursor:pointer;" onclick = "clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" /><span style="cursor:pointer;" onclick="checkAllFrames.click();" onmouseover="showHelp(checkAllFrames, event)" onmouseout="showHelp(checkAllFrames, event)" data-i18n="settings.txt_all_frames"></span>
-					</div>
-				</div>
-				<div id="infoLoad" style="position:absolute; top:100px; left:30px; width:340px; height:50px; line-height:50px; border: solid 2px #808080; visibility:hidden; background-color:#ffffff; text-align:center; vertical-align:middle; font-weight:bold;" data-i18n="settings.info_load">Info Test</div>
-			</td>
-			<td id="tdDisplay" style="vertical-align: top;">
-				<!-- LED ring display -->
-				<div id="parentRing" style="position:relative; left:0px; top:0px; width:400px; height:400px; background-color:#000000; overflow: hidden;">
-					<div id="divRing" style="width:400px; height:400px;">
-						<canvas id="canvRing" width="400" height="400" style="position:relative; left:0px; top:0px; width:400px; height:400px; filter: blur(0px);"></canvas>
-						<canvas id="canvRing2" width="400" height="400" style="position:absolute; left:0px; top:0px; width:400px; height:400px; filter: blur(0px); transition-duration: 1s;"></canvas>
-					</div>
-					<canvas id="canvTop" width="400" height="400" style="position:absolute; left:0px; top:0px; width:400px; height:400px;"></canvas>
-
-					<div id="frameNumber" style="position:absolute; left:330px; top:0px; height:20px; width:100px; text-align:left; font-size:12px;">Frame: 200</div>
-					<div id="txtLedRing" style="position:absolute; left:200px; top:382px; height:18px; width:198px; text-align:right; font-size:9px;" data-i18n="settings.txt_ledring"></div>
-								
-					<!-- Central LED edit -->
-					<div id="divEdit" style="top:0px; left:0px; width:400px; height:400px;">
-						<div id="headerEditor" style="position:absolute; left:0px; top:70px; width:400px; text-align:center;" data-i18n="settings.header_editor"></div>
-						<svg id="linePointer" height="400" width="400" style="position:absolute; top:0px; left:0px; width:400px; height:400px;">
-							<line id="lPointer" stroke-dasharray="2, 2" x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(0,0,0); stroke-width:2; transition: stroke .25s linear; visibility:hidden;" />
-						</svg>
-						<img id="butTopColor" src="../assets/images/icon_bw.png" height="20" width="20" style="position:absolute; left:2px; top:2px; width:20px; height:20px; padding: 0px 0px; cursor:pointer;" onclick="changeTopColor();" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
-						<div id="ledMarkers" style="top:0px; left:0px; width:400px; height:400px;"> </div>
-
-						<div style="position:absolute; left:95px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_processing">Edit</div>
-						<select id="dropFillType" name="dropFillType" style="position:absolute; left:95px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick = "selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
-							<option value="type_1" data-i18n="settings.txt_drop_type_1">1 or more</option>
-							<option value="type_2" data-i18n="settings.txt_drop_type_2">skip</option>
-							<option value="type_3" data-i18n="settings.txt_drop_type_3">fill</option>
-						</select>
-
-						<div style="position:absolute; left:200px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_range">Range</div>
-						<select id="dropFillRange" name="dropFillRange" style="position:absolute; left:200px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick = "selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
-							<option value="fill_2" data-i18n="settings.ed_fill_range_2">to every 2nd LED</option>
-						</select>
-
-						<canvas id="colPreview" height="20" width="100" style="position:absolute; border-style:outset; border-width:1px; left:150px; top:210px; width:100px; height:20px; background-color:#000000; color: #ffffff; text-align: center; cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" data-i18n="settings.ed_apply_off"></canvas>
-						<div style="position:absolute; left:150px; top:230px; width:100px; height:20px; color:#000000; text-align:center;" data-i18n="settings.txt_led_setting">LED status</div>
-					</div>
-				</div>
-				<!-- Pattern Generator -->
-				<div id="generatePattern" style="position:absolute; left:402px; top:32px; width:400px; height:400px; overflow: hidden; visibility:hidden;">
-					<table style="width:400px; border: none; border-collapse: collapse;">
-						<tr>
-							<td>
-								<div id="headerGenerator" style="position:absolute; left:0px; top:70px; width:400px; text-align:center;" data-i18n="settings.header_generator"></div>
-								<select id="dropGenerator" style="position:absolute; left:140px; top:100px; width:120px; height:20px; padding: 0px 0px;" onclick = "selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" >
-									<option value="gen_1" data-i18n="settings.generator_1"></option>
-								</select>
-								<div style="position:absolute; left:140px; top:125px; width:160px; height:24px;">
-									<input type="checkbox" disabled id="checkRandomColors" style="cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><span id="txtRandomColors" style="cursor:pointer;" onclick="checkRandomColors.click();" onmouseover="if(!checkRandomColors.disabled){showHelp(checkRandomColors, event);}" onmouseout="showHelp(checkRandomColors, event)" data-i18n="settings.txt_random_colors"></span>
-								</div>
-								<div style="position:absolute; left:140px; top:145px; width:160px; height:24px;">
-									<input type="checkbox" disabled id="checkFullFlow" style="cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><span id="txtFullFlow" style="cursor:pointer;" onclick="checkFullFlow.click();" onmouseover="if(!checkFullFlow.disabled){showHelp(checkFullFlow, event);}" onmouseout="showHelp(checkFullFlow, event)" data-i18n="settings.txt_full_flow"></span>
-								</div>
-								<table style="position:absolute; left:75px; top:190px;">
-									<tr><td id="genColInfo1" style="width:125px; text-align:right;"></td><td style="width:125px;"><button id="generatorCol1" disabled style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></button></td></tr>
-									<tr><td id="genColInfo2" style="width:125px; text-align:right;"></td><td style="width:125px;"><button id="generatorCol2" disabled style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></button></td></tr>
-									<tr><td id="genColInfo3" style="width:125px; text-align:right;"></td><td style="width:125px;"><button id="generatorCol3" disabled style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></button></td></tr>
-								
-									<tr><td id="txtGenFrame" style="width:125px; text-align:right;"> Frames</td><td>
-										<input id="inGenFrame" disabled style="width:50px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" type="number" value="10" min="1" max="200" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event);" onmouseout="showHelp(this, event)" />
-									</td>
+										</td>
+										<td style="text-align: left;" id="aniTime">xxx.x sec.
+										</td>
+										<td style="text-align: left;">
+											<input
+												style="width:40px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+												id="inRPM"
+												type="number"
+												value="0"
+												min="-127"
+												max="127"
+												oninput="changeNumberSetting(this);"
+												onmouseover="this.focus(); showHelp(this, event);"
+												onmouseout="showHelp(this, event)"
+												titel="Rotations Per Minute"/>
+											RPM.
+										</td>
+										<td style="width:100px;">
+											<div style=" position:relative; top:0px; left:0px; width:140px; height:32px;">
+												<button id="butPlay" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickPlay(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_play.png" height="30" width="30" style="float: center;"></button>
+												<button id="butPreview" class="buttonEdit" style="position:absolute; left:50px; top:0px;" onclick="clickPrev(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/homey_play.png" height="30" width="30" style="float: center;"></button>
+												<div style="position:absolute; left:91px; top:6px; width:30px; height:20px; padding:0px 2px;">x</div>
+												<input
+													id="inRepeat"
+													style="position:absolute; left:102px; top:6px; width:30px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+													type="number"
+													value="1"
+													min="1"
+													max="20"
+													oninput="changeNumberSetting(this);"
+													onmouseover="this.focus(); showHelp(this, event);"
+													onmouseout="showHelp(this, event)"/>
+											</div>
+										</td>
+										<td style="width:40px; font-size:12px; text-align:center;" id="repeatTime">00:00
+										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tr>
+							<td style="width:400px; vertical-align: top;">
+								<!-- list header -->
+								<table style="width: 100%; border: 1px solid Gainsboro; border-collapse: collapse;">
+									<tr style="background-color: Gainsboro;">
+										<th id="headerFrame" title="" style="width: 40px; text-align: center;" data-i18n="settings.header_frame"></th>
+										<th id="headerColors" title="" style="width: 240px; text-align: center;" data-i18n="settings.header_colors"></th>
+										<td style="width: 120px;"></td>
+										<td>&nbsp;</td>
+									</tr>
+								</table>
+								<!-- frames list -->
+								<div id="divFrameScroll" style="width: 400px; height: 377px; border: 1px solid Gainsboro; overflow: auto;">
+									<table id="tableFrames" style="width: 100%; border-collapse: collapse;" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></table>
+								</div>
+								<div id="divButtons" style=" position:relative; top:0px; left:0px; width:400px; height:32px;">
+									<!-- frame add/copy/import buttons -->
+									<input type="file" accept="image/*" size="30" id="openLeditor" style="position:absolute; left:0px; top:0px; visibility:hidden;"/>
+									<button id="but_ani_open" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_open.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_ani_store" class="buttonEdit" style="position:absolute; left:40px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_store.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_frame_add" class="buttonEdit" style="position:absolute; left:90px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/frame_new.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_frame_copy" class="buttonEdit" style="position:absolute; left:130px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/frame_duplicate.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_ani_fill_flow" class="buttonEdit" style="position:absolute; left:180px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_fill_flow.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_ani_fill_connect" class="buttonEdit" style="position:absolute; left:220px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_fill_connect.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_image_import" class="buttonEdit" style="position:absolute; left:360px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/image_import.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_generator_close" class="buttonEdit" style="position:absolute; left:400px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_ani_generator" class="buttonEdit" style="position:absolute; left:400px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/ani_generator.png" height="30" width="30" style="float: center;"></button>
+
+									<svg height="40" width="350" style="position:absolute; top:0px; left:490px; width:350px; height:40px;">
+										<line id="lineFrameAccess0" stroke-dasharray="1, 3" x1="20" y1="39" x2="265" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+
+										<line id="lineFrameAccess1" stroke-dasharray="1, 3" x1="20" y1="34" x2="20" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess2" stroke-dasharray="1, 3" x1="60" y1="34" x2="60" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess3" stroke-dasharray="1, 3" x1="110" y1="34" x2="110" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess4" stroke-dasharray="1, 3" x1="150" y1="34" x2="150" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess5" stroke-dasharray="1, 3" x1="200" y1="34" x2="200" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess6" stroke-dasharray="1, 3" x1="240" y1="34" x2="240" y2="39" style="stroke:rgb(0,0,0); stroke-width:1;"/>
+										<line id="lineFrameAccess7" stroke-dasharray="1, 3" x1="275" y1="25" x2="265" y2="39" style="stroke:rgb(0,0,0); stroke-width:1.3;"/>
+									</svg>
+									<button id="but_frame_clock" class="buttonEdit" style="position:absolute; left:490px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/rotate_clockwise.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_frame_counterclock" class="buttonEdit" style="position:absolute; left:530px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/rotate_counter_clockwise.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_frame_push" class="buttonEdit" style="position:absolute; left:580px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/shift_back.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_frame_pull" class="buttonEdit" style="position:absolute; left:620px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/shift_front.png" height="30" width="30" style="float: center;"></button>
+
+									<button id="but_edit_fill" class="buttonEdit" style="position:absolute; left:670px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/fill_solid.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_edit_flow" class="buttonEdit" style="position:absolute; left:710px; top:0px;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/fill_flow.png" height="30" width="30" style="float: center;"></button>
+									<div style="position:absolute; left:764px; top:5px; width:80px; height:32px; font-size:11px;">
+										<input type="checkbox" id="checkAllFrames" style="cursor:pointer;" onclick="clickFrameEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"/>
+										<span style="cursor:pointer;" onclick="checkAllFrames.click();" onmouseover="showHelp(checkAllFrames, event)" onmouseout="showHelp(checkAllFrames, event)" data-i18n="settings.txt_all_frames"></span>
+									</div>
+								</div>
+								<div
+									id="infoLoad"
+									style="position:absolute; top:100px; left:30px; width:340px; height:50px; line-height:50px; border: solid 2px #808080; visibility:hidden; background-color:#ffffff; text-align:center; vertical-align:middle; font-weight:bold;"
+									data-i18n="settings.info_load">Info Test</div>
+							</td>
+							<td id="tdDisplay" style="vertical-align: top;">
+								<!-- LED ring display -->
+								<div id="parentRing" style="position:relative; left:0px; top:0px; width:400px; height:400px; background-color:#000000; overflow: hidden;">
+									<div id="divRing" style="width:400px; height:400px;">
+										<canvas id="canvRing" width="400" height="400" style="position:relative; left:0px; top:0px; width:400px; height:400px; filter: blur(0px);"></canvas>
+										<canvas id="canvRing2" width="400" height="400" style="position:absolute; left:0px; top:0px; width:400px; height:400px; filter: blur(0px); transition-duration: 1s;"></canvas>
+									</div>
+									<canvas id="canvTop" width="400" height="400" style="position:absolute; left:0px; top:0px; width:400px; height:400px;"></canvas>
+
+									<div id="frameNumber" style="position:absolute; left:330px; top:0px; height:20px; width:100px; text-align:left; font-size:12px;">Frame: 200</div>
+									<div id="txtLedRing" style="position:absolute; left:200px; top:382px; height:18px; width:198px; text-align:right; font-size:9px;" data-i18n="settings.txt_ledring"></div>
+
+									<!-- Central LED edit -->
+									<div id="divEdit" style="top:0px; left:0px; width:400px; height:400px;">
+										<div id="headerEditor" style="position:absolute; left:0px; top:70px; width:400px; text-align:center;" data-i18n="settings.header_editor"></div>
+										<svg id="linePointer" height="400" width="400" style="position:absolute; top:0px; left:0px; width:400px; height:400px;">
+											<line id="lPointer" stroke-dasharray="2, 2" x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(0,0,0); stroke-width:2; transition: stroke .25s linear; visibility:hidden;"/>
+										</svg>
+										<img
+											id="butTopColor"
+											src="../assets/images/icon_bw.png"
+											height="20"
+											width="20"
+											style="position:absolute; left:2px; top:2px; width:20px; height:20px; padding: 0px 0px; cursor:pointer;"
+											onclick="changeTopColor();"
+											onmouseover="showHelp(this, event)"
+											onmouseout="showHelp(this, event)">
+										<div id="ledMarkers" style="top:0px; left:0px; width:400px; height:400px;"></div>
+
+										<div style="position:absolute; left:95px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_processing">Edit</div>
+										<select id="dropFillType" name="dropFillType" style="position:absolute; left:95px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick="selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+											<option value="type_1" data-i18n="settings.txt_drop_type_1">1 or more</option>
+											<option value="type_2" data-i18n="settings.txt_drop_type_2">skip</option>
+											<option value="type_3" data-i18n="settings.txt_drop_type_3">fill</option>
+										</select>
+
+										<div style="position:absolute; left:200px; top:150px; width:105px; height:20px; text-align:center; padding: 0px 0px;" data-i18n="settings.txt_range">Range</div>
+										<select id="dropFillRange" name="dropFillRange" style="position:absolute; left:200px; top:170px; width:105px; height:20px; padding: 0px 0px;" onclick="selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+											<option value="fill_2" data-i18n="settings.ed_fill_range_2">to every 2nd LED</option>
+										</select>
+
+										<canvas
+											id="colPreview"
+											height="20"
+											width="100"
+											style="position:absolute; border-style:outset; border-width:1px; left:150px; top:210px; width:100px; height:20px; background-color:#000000; color: #ffffff; text-align: center; cursor:pointer;"
+											onclick="clickEditButton(this);"
+											onmouseover="showHelp(this, event)"
+											onmouseout="showHelp(this, event)"
+											data-i18n="settings.ed_apply_off"></canvas>
+										<div style="position:absolute; left:150px; top:230px; width:100px; height:20px; color:#000000; text-align:center;" data-i18n="settings.txt_led_setting">LED status</div>
+									</div>
+								</div>
+								<!-- Pattern Generator -->
+								<div id="generatePattern" style="position:absolute; left:402px; top:32px; width:400px; height:400px; overflow: hidden; visibility:hidden;">
+									<table style="width:400px; border: none; border-collapse: collapse;">
+										<tr>
+											<td>
+												<div id="headerGenerator" style="position:absolute; left:0px; top:70px; width:400px; text-align:center;" data-i18n="settings.header_generator"></div>
+												<select id="dropGenerator" style="position:absolute; left:140px; top:100px; width:120px; height:20px; padding: 0px 0px;" onclick="selectEdit(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+													<option value="gen_1" data-i18n="settings.generator_1"></option>
+												</select>
+												<div style="position:absolute; left:140px; top:125px; width:160px; height:24px;">
+													<input type="checkbox" disabled id="checkRandomColors" style="cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+													<span
+														id="txtRandomColors"
+														style="cursor:pointer;"
+														onclick="checkRandomColors.click();"
+														onmouseover="if(!checkRandomColors.disabled){showHelp(checkRandomColors, event);}"
+														onmouseout="showHelp(checkRandomColors, event)"
+														data-i18n="settings.txt_random_colors"></span>
+												</div>
+												<div style="position:absolute; left:140px; top:145px; width:160px; height:24px;">
+													<input type="checkbox" disabled id="checkFullFlow" style="cursor:pointer;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
+													<span id="txtFullFlow" style="cursor:pointer;" onclick="checkFullFlow.click();" onmouseover="if(!checkFullFlow.disabled){showHelp(checkFullFlow, event);}" onmouseout="showHelp(checkFullFlow, event)" data-i18n="settings.txt_full_flow"></span>
+												</div>
+												<table style="position:absolute; left:75px; top:190px;">
+													<tr>
+														<td id="genColInfo1" style="width:125px; text-align:right;"></td>
+														<td style="width:125px;">
+															<button
+																id="generatorCol1"
+																disabled
+																style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;"
+																onclick="clickEditButton(this);"
+																onmouseover="showHelp(this, event)"
+																onmouseout="showHelp(this, event)"></button>
+														</td>
+													</tr>
+													<tr>
+														<td id="genColInfo2" style="width:125px; text-align:right;"></td>
+														<td style="width:125px;">
+															<button
+																id="generatorCol2"
+																disabled
+																style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;"
+																onclick="clickEditButton(this);"
+																onmouseover="showHelp(this, event)"
+																onmouseout="showHelp(this, event)"></button>
+														</td>
+													</tr>
+													<tr>
+														<td id="genColInfo3" style="width:125px; text-align:right;"></td>
+														<td style="width:125px;">
+															<button
+																id="generatorCol3"
+																disabled
+																style="width:80px; height:30px; color: #ffffff; border-style:outset; border-width:1px; text-align: center; cursor:pointer;"
+																onclick="clickEditButton(this);"
+																onmouseover="showHelp(this, event)"
+																onmouseout="showHelp(this, event)"></button>
+														</td>
+													</tr>
+
+													<tr>
+														<td id="txtGenFrame" style="width:125px; text-align:right;">
+															Frames</td>
+														<td>
+															<input
+																id="inGenFrame"
+																disabled
+																style="width:50px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+																type="number"
+																value="10"
+																min="1"
+																max="200"
+																oninput="changeNumberSetting(this);"
+																onmouseover="this.focus(); showHelp(this, event);"
+																onmouseout="showHelp(this, event)"/>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!-- **** color palette **** -->
+								<div id="divColorPal" style="position:absolute; top:0px; left:0px; width:240px; height:240px; background-color: #000000;"></div>
+							</td>
+							<td style="width:40px;">
+								<div id="divFrameEdit2" style=" position:relative; top:0px; left:0px; width:40px; height:432px;">
+									<!-- undo/redo buttons -->
+									<button id="but_edit_redo" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/edit_redo.png" height="30" width="30" style="float: center;"></button>
+									<button id="but_edit_undo" class="buttonEdit" style="position:absolute; left:0px; top:32px;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/edit_undo.png" height="30" width="30" style="float: center;"></button>
+								</div>
+							</td>
+						</tr>
 					</table>
-				</div>
-				<!-- **** color palette **** -->
-				<div id="divColorPal" style="position:absolute; top:0px; left:0px; width:240px; height:240px; background-color: #000000;"> </div>
-			</td>
-			<td style="width:40px;">
-				<div id="divFrameEdit2" style=" position:relative; top:0px; left:0px; width:40px; height:432px;">
-					<!-- undo/redo buttons -->
-					<button id="but_edit_redo" class="buttonEdit" style="position:absolute; left:0px; top:0px;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/edit_redo.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_edit_undo" class="buttonEdit" style="position:absolute; left:0px; top:32px;" onclick="clickEditButton(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/edit_undo.png" height="30" width="30" style="float: center;"></button>
-				</div>
-			</td>
-		</tr>
-		</table>
-		<!-- ***** image import ***** -->
-		<table id="imageImporter" style="position:relative; left:0px; top:0px; width:844px; visibility:hidden; border-collapse: collapse;">
-			<tr style="height:35px; background-color:#ffffff;">
-				<th style="width:400px; background-color: Gainsboro; text-align:center;">
-					<div data-i18n="settings.txt_led_colors">LED colors</div>
-				</th>
-				<td style="width:50px;background-color: Gainsboro; text-align:center;"></td>
-				<th style="width:400px; background-color: Gainsboro; text-align:center;">
-					<div data-i18n="settings.txt_image_selection"></div>
-				</th>
-			</tr>
-			<tr style="position:absolute; left:0px; top:35px; height:433px; background-color:#ffffff;">
-				<td style="width:400px;">
-					<div id="divImageFrames" style="position:absolute; top:0px; left:0px; width: 400px; height: 398px; border: 1px solid Gainsboro; overflow: auto;">
-						<canvas id="canvImportedFrames" width="380" height="390" style="position:relative; left:0px; top:0px;" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></canvas>
-					</div>
-					<input type="file" accept="image/*" name="img" size="30" id="uploadimage" style="position:absolute; left:0px; top:400px; visibility:hidden;" />
-					<button id="but_open_image" class="buttonEdit" style="position:absolute; left:0px; top:400px;" onclick = "uploadimage.click();" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img id="iconOpenImage" src="../assets/images/open_image.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_import_accept" class="buttonEdit" style="position:absolute; left:320px; top:400px;" onclick = "closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/accept.png" height="30" width="30" style="float: center;"></button>
-					<button id="but_import_cancel" class="buttonEdit" style="position:absolute; left:360px; top:400px;" onclick = "closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
+					<!-- ***** image import ***** -->
+					<table id="imageImporter" style="position:relative; left:0px; top:0px; width:844px; visibility:hidden; border-collapse: collapse;">
+						<tr style="height:35px; background-color:#ffffff;">
+							<th style="width:400px; background-color: Gainsboro; text-align:center;">
+								<div data-i18n="settings.txt_led_colors">LED colors</div>
+							</th>
+							<td style="width:50px;background-color: Gainsboro; text-align:center;"></td>
+							<th style="width:400px; background-color: Gainsboro; text-align:center;">
+								<div data-i18n="settings.txt_image_selection"></div>
+							</th>
+						</tr>
+						<tr style="position:absolute; left:0px; top:35px; height:433px; background-color:#ffffff;">
+							<td style="width:400px;">
+								<div id="divImageFrames" style="position:absolute; top:0px; left:0px; width: 400px; height: 398px; border: 1px solid Gainsboro; overflow: auto;">
+									<canvas id="canvImportedFrames" width="380" height="390" style="position:relative; left:0px; top:0px;" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></canvas>
+								</div>
+								<input type="file" accept="image/*" name="img" size="30" id="uploadimage" style="position:absolute; left:0px; top:400px; visibility:hidden;"/>
+								<button id="but_open_image" class="buttonEdit" style="position:absolute; left:0px; top:400px;" onclick="uploadimage.click();" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img id="iconOpenImage" src="../assets/images/open_image.png" height="30" width="30" style="float: center;"></button>
+								<button id="but_import_accept" class="buttonEdit" style="position:absolute; left:320px; top:400px;" onclick="closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/accept.png" height="30" width="30" style="float: center;"></button>
+								<button id="but_import_cancel" class="buttonEdit" style="position:absolute; left:360px; top:400px;" onclick="closeImport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
+							</td>
+							<td style="width:40px;">
+								<div style="position:absolute; left:400px; top:0px; width:40px; height:100px;">
+									<div id="sliderDimmerVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
+									<input
+										type="range"
+										id="sliderDimmer"
+										min="-0.99"
+										max="0"
+										step="0.01"
+										value=0
+										class="sliderImport"
+										oninput="sliderImportInput(this);"
+										onwheel="sliderImportWheel(this, event);"
+										ondblclick="sliderImportDouble(this);"
+										onmouseover="this.focus(); showHelp(this, event)"
+										onmouseout="showHelp(this, event)"/>
+									<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_dimmer">Dimmer</div>
+								</div>
+								<div style="position:absolute; left:400px; top:100px; width:40px; height:100px;">
+									<div id="sliderHueVal" class="sliderImportVal" style="position:absolute; left:3px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0&deg;</div>
+									<input
+										type="range"
+										id="sliderHue"
+										min="-0.5"
+										max="0.5"
+										step="0.0027777"
+										value=0
+										class="sliderImport"
+										oninput="sliderImportInput(this);"
+										onwheel="sliderImportWheel(this, event);"
+										ondblclick="sliderImportDouble(this);"
+										onmouseover="this.focus(); showHelp(this, event)"
+										onmouseout="showHelp(this, event)"/>
+									<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_hue">Hue</div>
+								</div>
+								<div style="position:absolute; left:400px; top:200px; width:40px; height:100px;">
+									<div id="sliderSaturationVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
+									<input
+										type="range"
+										id="sliderSaturation"
+										min="-1"
+										max="1"
+										step="0.01"
+										value=0
+										class="sliderImport"
+										oninput="sliderImportInput(this);"
+										onwheel="sliderImportWheel(this, event);"
+										ondblclick="sliderImportDouble(this);"
+										onmouseover="this.focus(); showHelp(this, event)"
+										onmouseout="showHelp(this, event)"/>
+									<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_saturation">Saturation</div>
+								</div>
+								<div style="position:absolute; left:400px; top:300px; width:40px; height:100px;">
+									<div id="sliderLightnessVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
+									<input
+										type="range"
+										id="sliderLightness"
+										min="-0.995"
+										max="0.995"
+										step="0.005"
+										value=0
+										class="sliderImport"
+										oninput="sliderImportInput(this);"
+										onwheel="sliderImportWheel(this, event);"
+										ondblclick="sliderImportDouble(this);"
+										onmouseover="this.focus(); showHelp(this, event)"
+										onmouseout="showHelp(this, event)"/>
+									<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_lightness">Lightness</div>
+								</div>
+							</td>
+							<td style="width:400px;">
+								<canvas id="canvImgAni" width="200" height="25" style="visibility:hidden;"></canvas>
+								<canvas id="canvImage" width="400" height="400" style="position:absolute; left:2px; top:2px;" onmousedown="imageMouseDown(this, event)" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></canvas>
+								<div
+									id="importArea"
+									style="position:absolute; left:0px; top:0px; border: 2px dotted #000000; transition: border-color .5s linear;"
+									onmousedown="imageMouseDown(this, event);"
+									onmousemove="imageMouseMove(event);"
+									onmouseover="showHelp(this, event)"
+									onmouseout="showHelp(this, event)">
+									<canvas id="canvImport" width="200" height="24" style="visibility:hidden; position:absolute; left:0px; top:0px;"></canvas>
+									<canvas id="canvImportV" width="200" height="24" style="position:absolute; left:0px; top:0px;"></canvas>
+								</div>
+								<button id="but_scan_direction" class="buttonEdit" style="position:absolute; left:444px; top:400px;" onclick="changeScanAspect()" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img id="iconScanDir" src="../assets/images/scan_right.png" height="30" width="30" style="float: center;"></button>
+								<div style="position:absolute; left:504px; top:400px; width:80px; height:32px;">
+									<input
+										id="inFrames"
+										style="width:40px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;"
+										type="number"
+										value="200"
+										min="1"
+										max="200"
+										oninput="changeNumberSetting(this);"
+										onmouseover="this.focus(); showHelp(this, event)"
+										onmouseout="showHelp(this, event)"
+										titel="Number of animation frames"/>
+									<div style="font-size:12px">frames</div>
+								</div>
+								<div style="position:absolute; left:680px; top:400px; width:160px; height:32px;">
+									<div style="position:absolute; left:0px; top:-2px; width:80px; height:15px; font-size:12px; text-align:right;" data-i18n="settings.txt_zoom">Zoom</div>
+									<div id="sliderZoomVal" style="position:absolute; left:90px; top:-2px; width:70px; height:15px; font-size:12px; text-align:left;">100%</div>
+									<input
+										type="range"
+										id="sliderZoom"
+										min="0"
+										max="0.99"
+										step="0.0025"
+										value=0
+										style="position:absolute; left:0px; top:20px; width:160px; height:10px; padding: 0px 0px; border:0px;"
+										oninput="sliderImportInput(this);"
+										onwheel="sliderImportWheel(this, event);"
+										ondblclick="sliderImportDouble(this);"
+										onmouseover="showHelp(this, event)"
+										onmouseout="showHelp(this, event)"/>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<!-- ***** image export ***** -->
+					<table id="imageExporter" style="position:relative; left:195px; top:-44px; width:450px; background-color:#ffffff; visibility:hidden; border:2px #7f7f7f solid; border-collapse:collapse; box-shadow: 0px 0px 30px rgba(0,0,16,0.5);">
+						<tr style="height:34px;">
+							<th style="background-color: Gainsboro; text-align:center;">
+								<span data-i18n="settings.header_export"></span>
+								<button id="but_export_cancel" class="buttonEdit" style="position:absolute; left:406px; top:1px;" onclick="closeExport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
+							</th>
+						</tr>
+						<tr style="height:50px;">
+							<th style="text-align:center; background-color:#f0f0f0;">
+								<a id="imageExport" download="LEDitor.png" href="">
+									<canvas id="canvImageExport" width="200" height="25" style="background-color:#808080;"></canvas>
+								</a>
+							</th>
+						</tr>
+						<tr>
+							<td style="text-align:left; vertical-align:top; background-color:#f0f0f0; padding:10px 10px;" data-i18n="settings.txt_save_animation"></td>
+						</tr>
+					</table>
 				</td>
-				<td style="width:40px;">
-					<div style="position:absolute; left:400px; top:0px; width:40px; height:100px;">
-						<div id="sliderDimmerVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
-						<input type="range" id="sliderDimmer" min="-0.99" max="0" step="0.01" value=0 class="sliderImport" oninput="sliderImportInput(this);" onwheel="sliderImportWheel(this, event);" ondblclick="sliderImportDouble(this);" onmouseover="this.focus(); showHelp(this, event)" onmouseout="showHelp(this, event)" />
-						<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_dimmer">Dimmer</div>
-					</div>
-					<div style="position:absolute; left:400px; top:100px; width:40px; height:100px;">
-						<div id="sliderHueVal" class="sliderImportVal" style="position:absolute; left:3px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0&deg;</div>
-						<input type="range" id="sliderHue" min="-0.5" max="0.5" step="0.0027777" value=0 class="sliderImport" oninput="sliderImportInput(this);" onwheel="sliderImportWheel(this, event);" ondblclick="sliderImportDouble(this);" onmouseover="this.focus(); showHelp(this, event)" onmouseout="showHelp(this, event)" />
-						<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_hue">Hue</div>
-					</div>
-					<div style="position:absolute; left:400px; top:200px; width:40px; height:100px;">
-						<div id="sliderSaturationVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
-						<input type="range" id="sliderSaturation" min="-1" max="1" step="0.01" value=0 class="sliderImport" oninput="sliderImportInput(this);" onwheel="sliderImportWheel(this, event);" ondblclick="sliderImportDouble(this);" onmouseover="this.focus(); showHelp(this, event)" onmouseout="showHelp(this, event)" />
-						<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_saturation">Saturation</div>
-					</div>
-					<div style="position:absolute; left:400px; top:300px; width:40px; height:100px;">
-						<div id="sliderLightnessVal" style="position:absolute; left:0px; top:2px; width:30px; height:15px; font-size:12px; text-align:center;">0</div>
-						<input type="range" id="sliderLightness" min="-0.995" max="0.995" step="0.005" value=0 class="sliderImport" oninput="sliderImportInput(this);" onwheel="sliderImportWheel(this, event);" ondblclick="sliderImportDouble(this);" onmouseover="this.focus(); showHelp(this, event)" onmouseout="showHelp(this, event)" />
-						<div style="position: absolute; left:-8px; top:50px; width:80px; height:15px; font-size:12px; text-align:center; transform: rotate(-90deg);" data-i18n="settings.txt_lightness">Lightness</div>
-					</div>
-				</td>
-				<td style="width:400px;">
-					<canvas id="canvImgAni" width="200" height="25" style="visibility:hidden;"></canvas>
-					<canvas id="canvImage" width="400" height="400" style="position:absolute; left:2px; top:2px;" onmousedown="imageMouseDown(this, event)" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"></canvas>
-					<div id="importArea" style="position:absolute; left:0px; top:0px; border: 2px dotted #000000; transition: border-color .5s linear;" onmousedown="imageMouseDown(this, event);" onmousemove="imageMouseMove(event);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)">
-						<canvas id="canvImport" width="200" height="24" style="visibility:hidden; position:absolute; left:0px; top:0px;"></canvas>
-						<canvas id="canvImportV" width="200" height="24" style="position:absolute; left:0px; top:0px;"></canvas>
-					</div>
-					<button id="but_scan_direction" class="buttonEdit" style="position:absolute; left:444px; top:400px;" onclick="changeScanAspect()" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img id="iconScanDir" src="../assets/images/scan_right.png" height="30" width="30" style="float: center;"></button>
-					<div style="position:absolute; left:504px; top:400px; width:80px; height:32px;">
-						<input id="inFrames" style="width:40px; height:20px; padding:0px 2px; border: 1px solid Gainsboro;" type="number" value="200" min="1" max="200" oninput="changeNumberSetting(this);" onmouseover="this.focus(); showHelp(this, event)" onmouseout="showHelp(this, event)" titel="Number of animation frames" /><div style="font-size:12px">frames</div>
-					</div>
-					<div style="position:absolute; left:680px; top:400px; width:160px; height:32px;">
-						<div style="position:absolute; left:0px; top:-2px; width:80px; height:15px; font-size:12px; text-align:right;" data-i18n="settings.txt_zoom">Zoom</div>
-						<div id="sliderZoomVal" style="position:absolute; left:90px; top:-2px; width:70px; height:15px; font-size:12px; text-align:left;">100%</div>
-						<input type="range" id="sliderZoom" min="0" max="0.99" step="0.0025" value=0 style="position:absolute; left:0px; top:20px; width:160px; height:10px; padding: 0px 0px; border:0px;" oninput="sliderImportInput(this);" onwheel="sliderImportWheel(this, event);" ondblclick="sliderImportDouble(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)" />
-					</div>
-				</td>
 			</tr>
 		</table>
-		<!-- ***** image export ***** -->
-		<table id="imageExporter" style="position:relative; left:195px; top:-44px; width:450px; background-color:#ffffff; visibility:hidden; border:2px #7f7f7f solid; border-collapse:collapse; box-shadow: 0px 0px 30px rgba(0,0,16,0.5);">
-			<tr style="height:34px;">
-				<th style="background-color: Gainsboro; text-align:center;"><span data-i18n="settings.header_export"></span>
-					<button id="but_export_cancel" class="buttonEdit" style="position:absolute; left:406px; top:1px;" onclick = "closeExport(this);" onmouseover="showHelp(this, event)" onmouseout="showHelp(this, event)"><img src="../assets/images/editor.png" height="30" width="30" style="float: center;"></button>
-				</th>
-			</tr>
-			<tr style="height:50px;">
-				<th style="text-align:center; background-color:#f0f0f0;">
-					<a id="imageExport" download="LEDitor.png" href="">
-						<canvas id="canvImageExport" width="200" height="25" style="background-color:#808080;" ></canvas>
-					</a>
-				</th>
-			</tr>
-			<tr>
-				<td style="text-align:left; vertical-align:top; background-color:#f0f0f0; padding:10px 10px;" data-i18n="settings.txt_save_animation"></td>
-			</tr>
-		</table>
-	</td></tr></table>
-	<script type="text/javascript" src="leditor.js"></script>
-</body>
+		<script type="text/javascript" src="leditor.js"></script>
+	</body>
 </html>
